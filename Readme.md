@@ -5,7 +5,9 @@
 #### Completed Tasks ####
 - [x] CRUD
 - [x] Admin Panel
+- [x] Auth to Admin Panel
+- [x] Making the Project RESTfull Api
 
 #### Todo ####
-- [ ] Auth to Admin Panel
-- [ ] Making the Project RESTfull Api
+- [ ] Postman Requests
+- [ ] Front-End 

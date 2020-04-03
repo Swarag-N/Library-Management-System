@@ -1,0 +1,305 @@
+{
+  "info": {
+    "_postman_id": "1d88827d-cb69-4b9b-bb85-9fbec9c61bc0",
+    "name": "library management system",
+    "description": "## This is a POSTMAN Collection for library management system.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Index of Items",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "7e915214-1b50-48ce-8e4f-17d521dbd213",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "var a = pm.globals.get(\"_id\");",
+              "console.log(a);",
+              "var a = pm.environment.get(\"variable_key\");",
+              "console.log(a);",
+              "var a =pm.variables.get(\"variable_key\");",
+              "console.log(a);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Item",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "1b3b93bd-a302-4bae-9541-eae1e99768bc",
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+              "});",
+              "",
+              "let jsonData = pm.response.json();",
+              "pm.environment.set(\"newId\", jsonData._id);",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "c711d488-ea46-4a6b-a5c6-7fe2aaa7048f",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\t\"name\":\"{{$randomCatchPhrase}}\",\r\n\t\"cupBoardNumber\":{{$randomInt}},\r\n\t\"genre\":\"{{$randomColor}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/new",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "new"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Show item",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "7a732445-0693-471f-b3e3-9a2ae5a20707",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "",
+              "let jsonData = pm.response.json();",
+              "pm.environment.set(\"newId\", jsonData._id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/show?id={{newId}}",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "show"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "5e7fc914cb2d74473c3ee4c0",
+              "disabled": true
+            },
+            {
+              "key": "id",
+              "value": "5e7fc914cb2d74473c3ee4c3",
+              "disabled": true
+            },
+            {
+              "key": "id",
+              "value": "{{newId}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update item",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "9afe622e-30b0-4b3d-ad1b-41d026931c78",
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    //The request is redirected so the status code is kept for 200",
+              "    pm.expect(pm.response.code).to.be.oneOf([200]);",
+              "});",
+              "",
+              "pm.test(\"Body matches string\", function () {",
+              "    pm.expect(pm.response.text()).to.include(\"Intelligent\");",
+              "});",
+              "",
+              "pm.test(\"Body matches string\", function () {",
+              "    pm.expect(pm.response.text()).to.include({{new_name}});",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "2f828358-a5a0-4c96-89bb-12ff5ed5fa82",
+            "exec": [
+              "pm.environment.set(\"new_name\", \"{{$randomCatchPhrase}}\");",
+              "console.log(new_name)"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\t\"name\": \"{{new_name}}\",\r\n\t\"cupBoardNumber\": 74185,\r\n\t\"genre\": \"Intelligent\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}/update?id={{newId}}",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "update"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "5e7fc914cb2d74473c3ee4c3",
+              "disabled": true
+            },
+            {
+              "key": "id",
+              "value": "{{newId}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Item",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "5d8535f9-8ce8-4a57-9c50-4bf87d6c582c",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.environment.unset(\"newId\");"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{url}}/delete?id={{newId}}",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "delete"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "5e7fc914cb2d74473c3ee4c1",
+              "disabled": true
+            },
+            {
+              "key": "id",
+              "value": "{{newId}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "96607e0e-1777-4953-9b5b-052f64b6eaf1",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "21e540d3-2e67-4a22-b2cd-20bf82b7d12f",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "2e13c7c0-b0ae-403b-8c7e-72bf1a6788e1",
+      "key": "url",
+      "value": "localhost:7894/api/books",
+      "type": "string"
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
