@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
-let bookSchema = new mongoose.Schema({
-   name:{
-      type:String,
-      required:true
-   },
-   cupBoardNumber:Number,
-   genre:String
+const bookSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  cupBoardNumber: Number,
+  genre: String,
 });
 
-let Book;
-Book = new mongoose.model("Book",bookSchema);
+/* eslint new-cap: ["error", { "newIsCapExceptionPattern": "^mongoose\.." }] */
+const Book = new mongoose.model('Book', bookSchema);
 module.exports = Book;

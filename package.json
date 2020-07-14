@@ -6,8 +6,11 @@
     "start": "node ./bin/www",
     "test": "mocha --recursive --exit",
     "seed": "node seed.js",
+    "lint": "eslint .",
+    "lint-fix": "npm run lint -- --fix",
+    "pretest": "npm run lint",
     "coverage": "nyc npm run test",
-    "dev":"nodemon ./bin/www"
+    "dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "admin-bro": "^2.8.0",
@@ -26,11 +29,30 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "eslint": "^7.4.0",
+    "eslint-config-google": "^0.14.0",
     "faker": "^4.1.0",
     "mocha": "^8.0.1",
     "nyc": "^15.1.0",
     "supertest": "^4.0.2"
   },
+  "eslintConfig": {
+    "extends": ["eslint:recommended", "google"],
+    "env": {
+        "node" : true,
+        "es6":true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2018
+    },
+    "rules" : {
+      "max-len": [2, 120, 4, {"ignoreUrls": true}],
+      "no-console": 0
+    }
+  },
+  "eslintIgnore": [
+    "node_modules"
+  ],
   "description": "---\r ####Completed Tasks\r [x] CRUD\r [x] Admin Panel",
   "main": "app.js",
   "repository": {
