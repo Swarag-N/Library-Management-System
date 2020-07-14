@@ -1,3 +1,5 @@
+const { HttpError } = require('http-errors');
+
 const express = require('express'),
     createError = require('http-errors'),
     router = express.Router(),
@@ -11,11 +13,17 @@ function isEmpty(obj) {
     return true;
 }
 
-//READ
+// // Use middleware to set the default Content-Type
+// router.use((req, res, next)=>{
+//     res.header('Content-Type', 'application/json');
+//     next();
+// });
+
+//INDEX READ
 router.get('/', function (req, res) {
     Book.find({}, (onerror, foundBooks) => {
         if (onerror) {
-            console.warn(onerror);
+            // console.warn(onerror);
             response.redirect("/");
         } else {
             res.send(foundBooks);
@@ -23,40 +31,27 @@ router.get('/', function (req, res) {
     });
 });
 
-//CREATE
-router.post('/new', (request, response, next) => {
+//CREATE 
+router.post('/', (request, response, next) => {
     if (isEmpty(request.body)) {
-        let err = createError(501);
-        response.render('error', {
-            "message": "Got an Empty Object",
-            "error": err
-        });
+        let err = createError(406);
+        response.status(406).json(err)
     } else {
         Book.create(request.body, (onerror, createdBook) => {
             if (onerror) {
-                console.log(request.body);
-                response.status(204).render('error', {
-                    "message": "POST object not Good",
-                    "error": onerror
-                });
+                response.status(400).json(createError(400,'Parameter Missing'))
             } else {
-                response.status(202).send(createdBook);
-                // response.redirect("/api/books/show?id=" + createdBook.id.toString())
+                response.status(201).json(createdBook);
             }
         })
     }
 });
 
-//SHOW
-router.get('/show', (request, response) => {
-    Book.findById(request.query.id, (onerror, foundBook) => {
+//SHOW READ
+router.get('/:id', (request, response) => {
+    Book.findById(request.params.id, (onerror, foundBook) => {
         if (onerror) {
-            let err = createError(404);
-            console.warn(onerror.code, onerror.message);
-            response.render('error', {
-                "message": "Book not found",
-                "error": err
-            })
+            response.status(404).json(createError(404,"Book Not Found"))
         } else {
             response.send(foundBook)
         }
@@ -64,34 +59,34 @@ router.get('/show', (request, response) => {
 });
 
 
-//Update
-router.put("/update", (request, response) => {
-    Book.findByIdAndUpdate(
-        request.query.id,
-        request.body,
-        (onerror, updateBook) => {
-            if (onerror) {
-                let err = createError(402);
-                console.warn(onerror.code, onerror.message);
-                response.render('error', {
-                    "message": "Book not found",
-                    "error": err
-                })
-            } else {
-                response.status(202).redirect("/api/books/show?id=" + updateBook.id.toString())
+//UPDATE 
+router.put("/:id/edit", (request, response) => {
+    if (isEmpty(request.body)) {
+        let err = createError(406);
+        response.status(406).json(createError(406))
+    }else{
+        Book.findByIdAndUpdate(
+            request.params.id,
+            request.body,
+            {new: true},
+            (onerror, updateBook) => {
+                if (onerror) {
+                    response.status(400).json(createError(400))
+                } else {
+                    response.status(202).json(updateBook)
+                }
             }
-        }
-    )
+        )
+    }
 });
 
-//Delete
-router.delete("/delete", (request, response) => {
-    Book.findByIdAndDelete(request.query.id, (onerror) => {
+//DELETE
+router.delete("/:id", (request, response) => {
+    Book.findByIdAndDelete(request.params.id, (onerror) => {
         if (onerror) {
-            console.warn(onerror);
-            response.redirect("/");
+            response.status(400).json(createError(400,onerror.message))
         } else {
-            response.redirect("/api/books");
+            response.status(204).json({message:"Book Deleted"});
         }
     })
 });

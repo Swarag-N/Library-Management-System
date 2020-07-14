@@ -9,27 +9,29 @@ const express = require('express'),
 const indexRouter = require('./routes/index'),
     usersRouter = require('./routes/users'),
     bookRouter = require('./routes/bookRoutes'),
-    bookRouterAPI = require('./routes/bookRoutesAPI'),
-    adminRouter = require('./routes/adminRouter');
+    bookRouterAPI = require('./routes/bookRoutesAPI');
 
 const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(logger('dev'));
 
+if (process.env.NODE_ENV !== 'test'){
+   app.use(logger('dev'));
+   adminRouter = require('./routes/adminRouter');
+   app.use("/admin", adminRouter);
+}
 
 // Database Connections
 const MongoDataBase = process.env.MONGO_URl || "mongodb://localhost:27017/lms";
-mongoose.connect(MongoDataBase,
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    },
-    () => {
-        console.log("Database Connection to lms ");
-    });
+mongoose.connect(MongoDataBase,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true}
+    // ,() => {
+    //     console.log("Database Connection to lms ")
+    // }
+    );
 
 //for  deprecationWarning: Mongoose: `findOneAndUpdate()` and `findOneAndDelete()` without the `useFindAndModify`
 mongoose.set('useNewUrlParser', true);
@@ -37,7 +39,6 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
-app.use("/admin", adminRouter);
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
