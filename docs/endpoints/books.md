@@ -1,8 +1,8 @@
-# `Book` Endpoints
+# `Book` Endpoints #
 
 Get Deatils of Books.
 
-## Routes
+## Routes ##
 
 |Name|Method|Route|
 |---|---|---|
@@ -12,19 +12,19 @@ Get Deatils of Books.
 |[Update](#endpoint-update)|`PUT`| `/api/books/:id/edit`|
 |[Delete](#endpoint-delete)|`DELETE`|`/api/books/:id`|
 
-## EndPoint LIST
+## EndPoint LIST ##
 
 Lists all the Books in DB
 
-### LIST Example
+### LIST Example ###
 
-#### Request `GET /api/books/`
+#### Request `GET /api/books/` ####
 
 ```properties
 curl --location --request GET 'localhost:7894/api/books/'
 ```
 
-#### Response `GET /api/books/`
+#### Response `GET /api/books/` ####
 
 ``` json
 [
@@ -52,19 +52,19 @@ curl --location --request GET 'localhost:7894/api/books/'
 ]
 ```
 
-## EndPoint SHOW
+## EndPoint SHOW ##
 
 Shows The Book Requested
 
-### SHOW Example
+### SHOW Example ##
 
-#### Request `GET /api/books/:id`
+#### Request `GET /api/books/:id` ####
 
 ```properties
 curl --location --request GET 'localhost:7894/api/books/5e7fc914cb2d74473c3ee4c0'
 ```
 
-#### Response `GET /api/books/:id`
+#### Response `GET /api/books/:id` ####
 
 ``` json
 {
@@ -76,13 +76,13 @@ curl --location --request GET 'localhost:7894/api/books/5e7fc914cb2d74473c3ee4c0
 }
 ```
 
-## EndPoint Create
+## EndPoint Create ##
 
 Creates A Book and Sends the Created Book
 
-### CREATE Example
+### CREATE Example ###
 
-#### Request `POST /api/books/:id`
+#### Request `POST /api/books/:id` ####
 
 ```properties
 curl --location --request POST 'localhost:7894/api/books/' \
@@ -94,7 +94,7 @@ curl --location --request POST 'localhost:7894/api/books/' \
 }'
 ```
 
-#### Response `POST /api/books/:id`
+#### Response `POST /api/books/:id` ####
 
 ``` json
 {
@@ -106,13 +106,13 @@ curl --location --request POST 'localhost:7894/api/books/' \
 }
 ```
 
-## EndPoint Update
+## EndPoint Update ##
 
 Updates the Book by  ID and Sends the Updated Book
 
-### UPDATE Example
+### UPDATE Example ##
 
-#### Request `PUT /api/books/:id/edit`
+#### Request `PUT /api/books/:id/edit` ####
 
 ```properties
 curl --location --request PUT 'localhost:7894/api/books/5f0e9ff99221a82888bdc8cb/edit' \
@@ -122,7 +122,7 @@ curl --location --request PUT 'localhost:7894/api/books/5f0e9ff99221a82888bdc8cb
 }'
 ```
 
-#### Response `PUT /api/books/:id/edit`
+#### Response `PUT /api/books/:id/edit` ####
 
 ``` json
 {
@@ -134,19 +134,19 @@ curl --location --request PUT 'localhost:7894/api/books/5f0e9ff99221a82888bdc8cb
 }
 ```
 
-## EndPoint Delete
+## EndPoint Delete ##
 
 Deletes the Book by ID Send JSON Response.
 
-### DELETE Example
+### DELETE Example ###
 
-#### Request `DELETE /api/books/:id`
+#### Request `DELETE /api/books/:id` ####
 
 ```properties
 curl --location --request DELETE 'localhost:7894/api/books/5e7fc914cb2d74473c3ee4c2'
 ```
 
-#### Response `DELETE /api/books/:id`
+#### Response `DELETE /api/books/:id` ####
 
 ``` properties
 StatusCode 204 is Sent

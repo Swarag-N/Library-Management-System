@@ -22,5 +22,5 @@ GUI Interface of Data in MongoDB
 
 ## Models
 
-[`Book`](models/fact.md)
-An animal fact
+[`Book`](models\book.md)
+A Book Model
