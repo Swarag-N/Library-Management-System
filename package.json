@@ -6,7 +6,7 @@
     "start": "node ./app/bin/www",
     "test": "cd app && mocha --recursive --exit",
     "seed": "node seed.js",
-    "lint": "eslint ./app/**",
+    "lint": "eslint .",
     "lint-fix": "npm run lint -- --fix",
     "pretest": "npm run lint",
     "coverage": "nyc npm run test",
