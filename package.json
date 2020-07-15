@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "test": "mocha --recursive --exit",
+    "start": "node ./app/bin/www",
+    "test": "cd app && mocha --recursive --exit",
     "seed": "node seed.js",
-    "lint": "eslint .",
+    "lint": "eslint app/**",
     "lint-fix": "npm run lint -- --fix",
     "pretest": "npm run lint",
     "coverage": "nyc npm run test",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./app/bin/www"
   },
   "dependencies": {
     "admin-bro": "^2.8.0",
@@ -51,7 +51,9 @@
     }
   },
   "eslintIgnore": [
-    "node_modules"
+    "node_modules",
+    "views",
+    "public"
   ],
   "description": "---\r ####Completed Tasks\r [x] CRUD\r [x] Admin Panel",
   "main": "app.js",

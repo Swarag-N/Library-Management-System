@@ -13,6 +13,7 @@
 - [x] Tests
 - [x] ES Lint Configuration
 - [X] Added Docs
+- [x] Project Restructure
 
 ## Todo ##
 
@@ -20,7 +21,6 @@
 
 - [ ] Add Filter
 - [ ] Add Pagination
-- [ ] Project Restructure
 - [ ] Format to Only JSON API
 - [x] Postman Requests *Need To Change*
 

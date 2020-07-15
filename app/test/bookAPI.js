@@ -5,7 +5,7 @@ const {expect} = require('chai');
 
 const request = require('supertest');
 
-const app = require('../app');
+const app = require('../../app');
 
 let NEW_BOOK_ID;
 
