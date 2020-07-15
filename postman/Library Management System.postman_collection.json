@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "1d88827d-cb69-4b9b-bb85-9fbec9c61bc0",
+		"name": "Library Management System",
+		"description": "## This is a POSTMAN Collection for library management system.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CRUD Operations",
+			"item": [
+				{
+					"name": "Index of Items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9c07550a-ac27-427c-8ef8-7e1aeaa4f831",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b3b93bd-a302-4bae-9541-eae1e99768bc",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});",
+									"",
+									"let jsonData = pm.response.json();",
+									"pm.environment.set(\"newId\", jsonData._id);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c711d488-ea46-4a6b-a5c6-7fe2aaa7048f",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\":\"{{$randomCatchPhrase}}\",\r\n\t\"cupBoardNumber\":{{$randomInt}},\r\n\t\"genre\":\"{{$randomCatchPhraseAdjective}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a732445-0693-471f-b3e3-9a2ae5a20707",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"let jsonData = pm.response.json();",
+									"pm.environment.set(\"newId\", jsonData._id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{newId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{newId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9afe622e-30b0-4b3d-ad1b-41d026931c78",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([202]);",
+									"});",
+									"",
+									"let new_name = pm.environment.get(\"new_name\");",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(new_name);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2f828358-a5a0-4c96-89bb-12ff5ed5fa82",
+								"exec": [
+									"pm.environment.set(\"new_name\", pm.variables.replaceIn('{{$randomCatchPhrase}}'));",
+									"",
+									"let new_name = pm.environment.get(\"new_name\");",
+									"console.log(new_name)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"genre\": \"{{new_name}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/{{newId}}/edit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{newId}}",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d8535f9-8ce8-4a57-9c50-4bf87d6c582c",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"pm.environment.unset(\"newId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{newId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{newId}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5e7fc914cb2d74473c3ee4c1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "96607e0e-1777-4953-9b5b-052f64b6eaf1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "21e540d3-2e67-4a22-b2cd-20bf82b7d12f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "c8ed0e55-9042-4203-a063-0078e873da56",
+			"key": "url",
+			"value": "localhost:7894/api/books"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

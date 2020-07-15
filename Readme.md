@@ -4,6 +4,8 @@
 
 `See Docs of` [Library-Management-System](https://swarag-n.github.io/Library-Management-System/)
 
+`POSTMAN Docs` [here]('postman/postman.md')
+
 ## Completed Tasks ##
 
 - [x] CRUD
@@ -14,6 +16,8 @@
 - [x] ES Lint Configuration
 - [X] Added Docs
 - [x] Project Restructure
+- [x] Postman Requests
+- [x] Format to Only JSON API
 
 ## Todo ##
 
@@ -21,8 +25,6 @@
 
 - [ ] Add Filter
 - [ ] Add Pagination
-- [ ] Format to Only JSON API
-- [x] Postman Requests *Need To Change*
 
 ### Major Design Changes ###
 

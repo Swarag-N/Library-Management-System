@@ -1,20 +1,14 @@
 const express = require('express');
 const router = new express.Router();
 
-// const indexRouter = require('./app/routes/index');
-const usersRouter = require('./users');
-const bookRouter = require('./bookRoutes');
 const bookRouterAPI = require('./bookRoutesAPI');
 
-// if (process.env.NODE_ENV !== 'test') {
-//   // router.use(logger('dev'));
-//   const adminRouter = require('./adminRouter');
-//   router.use('/admin', adminRouter);
-// }
+// Use middleware to set the default Content-Type
+router.use((req, res, next)=>{
+  res.header('Content-Type', 'application/json');
+  next();
+});
 
-// router.use('/', indexRouter);
-router.use('/users', usersRouter);
-router.use('/books', bookRouter);
 router.use('/api/books', bookRouterAPI);
 
 /* GET home page. */

@@ -2,27 +2,8 @@ const express = require('express');
 const createError = require('http-errors');
 const router = new express.Router();
 const Book = require('../models/bookModel.js');
+const isEmpty = require('../utils/seralizeer.help').isEmpty;
 
-/**
- *
- * @param {object} obj object with no keys
- * @return {boolean} true when empty
- */
-function isEmpty(obj) {
-  for (const key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-    // if (obj.hasOwnProperty(key)) {
-      return false;
-    }
-  }
-  return true;
-}
-
-// // Use middleware to set the default Content-Type
-// router.use((req, res, next)=>{
-//     res.header('Content-Type', 'application/json');
-//     next();
-// });
 
 // INDEX READ
 router.get('/', function(req, res) {
