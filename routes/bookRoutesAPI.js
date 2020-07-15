@@ -89,7 +89,7 @@ router.delete('/:id', (request, response) => {
     if (onerror) {
       response.status(400).json(createError(400, onerror.message));
     } else {
-      response.status(204).json({message: 'Book Deleted'});
+      response.status(204).send({message: 'Book Deleted'});
     }
   });
 });

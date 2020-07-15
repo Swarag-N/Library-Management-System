@@ -11,6 +11,7 @@
 - [x] Postman Requests
 - [x] Tests
 - [x] ES Lint Configuration
+- [X] Added Docs
 
 ## Todo ##
 
