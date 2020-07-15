@@ -12,19 +12,19 @@
 - [x] Admin Panel
 - [x] Auth to Admin Panel
 - [x] Making the Project RESTfull Api
-- [x] Tests
 - [x] ES Lint Configuration
-- [X] Added Docs
 - [x] Project Restructure
 - [x] Postman Requests
 - [x] Format to Only JSON API
+- [x] Add Filter
+- [x] Add Pagination
 
 ## Todo ##
 
 ### Minor Refinements ###
 
-- [ ] Add Filter
-- [ ] Add Pagination
+- [ ] Added Docs //for filter routes
+- [ ] Tests
 
 ### Major Design Changes ###
 

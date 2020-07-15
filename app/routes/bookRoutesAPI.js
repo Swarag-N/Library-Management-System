@@ -1,20 +1,45 @@
 const express = require('express');
 const createError = require('http-errors');
+
 const router = new express.Router();
 const Book = require('../models/bookModel.js');
-const isEmpty = require('../utils/seralizeer.help').isEmpty;
 
+const {isEmpty} = require('../utils/seralizeer.help');
+const {searchParams, isSortInValid} = require('../utils/search.serializer');
+
+const NUM_RESULTS = 10;
 
 // INDEX READ
 router.get('/', function(req, res) {
-  Book.find({}, (onerror, foundBooks) => {
-    if (onerror) {
-      res.status(500).json(createError(500));
-    } else {
-      res.json(foundBooks);
-    }
-  });
+  const {page=1, name='', cbNum=0, genr='', sort='asc', lte=false} = req.query;
+  console.table({page, name, cbNum, genr, sort, lte});
+  if (isSortInValid(sort)) {
+    res.status(400).json(createError(400, `sort must be one of asc desc`));
+  } else {
+    const findData = searchParams(name, cbNum, genr);
+    Book.find(findData, null, {
+      sort: {
+        cupBoardNumber: sort,
+      },
+      limit: NUM_RESULTS,
+      skip: NUM_RESULTS*(page-1)}, (onerror, foundBooks) => {
+      if (onerror) {
+        res.status(500).json(createError(500));
+      } else {
+        Book.find({...findData}).countDocuments((err, total)=>{
+          if (err) {
+            res.status(500).json(createError(500));
+          } else {
+            const count = foundBooks.length;
+            const books = count===0?`No Books\n Move Back by ${page-1-(~~(total/NUM_RESULTS))} Page(s)`:foundBooks;
+            res.json({count, total, page, books});
+          }
+        });
+      }
+    });
+  }
 });
+
 
 // CREATE
 router.post('/', (request, response, next) => {
@@ -31,6 +56,7 @@ router.post('/', (request, response, next) => {
     });
   }
 });
+
 
 // SHOW READ
 router.get('/:id', (request, response) => {
@@ -63,6 +89,7 @@ router.put('/:id/edit', (request, response) => {
     );
   }
 });
+
 
 // DELETE
 router.delete('/:id', (request, response) => {

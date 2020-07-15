@@ -80,8 +80,8 @@ describe('API OF BOOKS', ()=>{
           .get('/api/books/')
           .expect('Content-Type', /json/)
           .expect((res)=>{
-            id = res.body[0]._id;
-            expect(res.body).to.be.an('array');
+            id = res.body['books'][0]._id;
+            expect(res.body).to.be.an('object');
           })
           .expect(200, done);
     });

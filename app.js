@@ -16,8 +16,8 @@ app.set('view engine', 'ejs');
 
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));
-  const adminRouter = require('./app/routes/adminRouter');
-  app.use('/admin', adminRouter);
+  // const adminRouter = require('./app/routes/adminRouter');
+  // app.use('/admin', adminRouter);
 }
 
 // Database Connections
