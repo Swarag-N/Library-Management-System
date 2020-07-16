@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
   if (isSortInValid(sort)) {
     res.status(400).json(createError(400, `sort must be one of asc desc`));
   } else {
-    const findData = searchParams(name, cbNum, genr);
+    const findData = searchParams(name, cbNum, genr, lte);
     Book.find(findData, null, {
       sort: {
         cupBoardNumber: sort,
