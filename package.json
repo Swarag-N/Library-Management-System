@@ -8,7 +8,7 @@
     "seed": "node ./app/utils/seed.js",
     "lint": "eslint .",
     "lint-fix": "npm run lint -- --fix",
-    "pretest": "npm run lint",
+    "pretest": "npm run lint && npm run seed",
     "coverage": "nyc npm run test",
     "report":"nyc report --reporter=text --reporter=html",
     "dev": "nodemon ./app/bin/www"

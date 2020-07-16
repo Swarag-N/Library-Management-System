@@ -16,6 +16,7 @@ describe('Query PARAMETERS', ()=>{
           .expect((res)=>{
             const {body} = res;
             expect(body).to.have.property('books');
+            expect(body['books'][0]).to.be.an('object');
           })
           .expect(200, done);
     });
@@ -26,7 +27,8 @@ describe('Query PARAMETERS', ()=>{
           .expect((res)=>{
             const {body} = res;
             expect(body).to.have.property('books');
-            expect(body['books']).to.have.length.above(1);
+            expect(body['books'][0]).to.be.an('object');
+            expect(body['books'].length>=2).to.be.true;
           })
           .expect(200, done);
     });
@@ -52,6 +54,7 @@ describe('Query PARAMETERS', ()=>{
           .expect((res)=>{
             const {body} = res;
             expect(body).to.have.property('books');
+            expect(body['books'][0]).to.be.an('object');
           })
           .expect(200, done);
     });
@@ -61,7 +64,7 @@ describe('Query PARAMETERS', ()=>{
           .get('/api/books?name=b')
           .expect((res)=>{
             const {body} = res;
-            expect(body['books']).to.have.length.above(1);
+            expect(body['books'].length>=2).to.be.true;
           })
           .expect(200, done);
     });
@@ -70,11 +73,12 @@ describe('Query PARAMETERS', ()=>{
   describe('Genre', ()=>{
     it('correct genre', (done)=>{
       request(app)
-          .get('/api/books?genr=2')
+          .get('/api/books?genr=e')
           .expect('Content-Type', /json/)
           .expect((res)=>{
             const {body} = res;
             expect(body).to.have.property('books');
+            expect(body['books'][0]).to.be.an('object');
           })
           .expect(200, done);
     });
@@ -84,7 +88,7 @@ describe('Query PARAMETERS', ()=>{
           .get('/api/books?genr=2')
           .expect((res)=>{
             const {body} = res;
-            expect(body['books']).to.have.length.above(1);
+            expect(body['books'].length>=1).to.be.true;
           })
           .expect(200, done);
     });
@@ -98,6 +102,7 @@ describe('Query PARAMETERS', ()=>{
           .expect((res)=>{
             const {body} = res;
             expect(body).to.have.property('books');
+            expect(body['books'][0]).to.be.an('object');
           })
           .expect(200, done);
     });
@@ -118,7 +123,7 @@ describe('Query PARAMETERS', ()=>{
           .get('/api/books?sort=desc')
           .expect((res)=>{
             const {body} = res;
-            expect(body['books']).to.have.length.above(2);
+            expect(body['books'].length>=3).to.be.true;
           })
           .expect(200, done);
     });
@@ -133,6 +138,7 @@ describe('Query PARAMETERS', ()=>{
           .expect((res)=>{
             const {body} = res;
             expect(body).to.have.property('books');
+            expect(body['books'][0]).to.be.an('object');
           })
           .expect(200, done);
     });
@@ -142,7 +148,7 @@ describe('Query PARAMETERS', ()=>{
           .get(`/api/books?cbNum=${CBN}`)
           .expect((res)=>{
             const {body} = res;
-            expect(body['books']).to.have.length.above(2);
+            expect(body['books'].length>=3).to.be.true;
           })
           .expect(200, done);
     });
@@ -162,20 +168,22 @@ describe('Query PARAMETERS', ()=>{
     const CBN = 34785;
     it('books are returned', (done)=>{
       request(app)
-          .get('/api/books?cbNum=45&lte=desc')
+          .get('/api/books?cbNum=4589&lte=desc')
           .expect('Content-Type', /json/)
           .expect((res)=>{
             const {body} = res;
             expect(body).to.have.property('books');
+            expect(body['books'][0]).to.be.an('object');
           })
           .expect(200, done);
     });
 
     it('more than 2 books are there', (done)=>{
       request(app)
-          .get('/api/books?cbNum=45&lte=desc')
+          .get('/api/books?cbNum=45784&lte=desc')
           .expect((res)=>{
             const {body} = res;
+            expect(body['books'][0]).to.be.an('object');
             expect(body['books'].length >= 2).to.be.true;
           })
           .expect(200, done);
