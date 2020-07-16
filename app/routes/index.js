@@ -13,8 +13,11 @@ router.use('/api/books', bookRouterAPI);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {title: 'Express'});
+  res.status(200).json({
+    message: 'This is the Root of API',
+  });
 });
+
 
 module.exports = router;
 

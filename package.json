@@ -10,6 +10,7 @@
     "lint-fix": "npm run lint -- --fix",
     "pretest": "npm run lint",
     "coverage": "nyc npm run test",
+    "report":"nyc report --reporter=text --reporter=html",
     "dev": "nodemon ./app/bin/www"
   },
   "dependencies": {

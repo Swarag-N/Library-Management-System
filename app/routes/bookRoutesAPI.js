@@ -12,7 +12,7 @@ const NUM_RESULTS = 10;
 // INDEX READ
 router.get('/', function(req, res) {
   const {page=1, name='', cbNum=0, genr='', sort='asc', lte=false} = req.query;
-  console.table({page, name, cbNum, genr, sort, lte});
+  process.env.NODE_ENV === 'development' && console.table({page, name, cbNum, genr, sort, lte});
   if (isSortInValid(sort)) {
     res.status(400).json(createError(400, `sort must be one of asc desc`));
   } else {

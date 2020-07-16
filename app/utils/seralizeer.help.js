@@ -1,19 +1,19 @@
-/**
- *
- * @param {obj} obj Object
- * @return {int} count
- */
-function countProperties(obj) {
-  let count = 0;
+// /**
+//  *
+//  * @param {obj} obj Object
+//  * @return {int} count
+//  */
+// function countProperties(obj) {
+//   let count = 0;
 
-  for (const property in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, property)) {
-      count++;
-    }
-  }
+//   for (const property in obj) {
+//     if (Object.prototype.hasOwnProperty.call(obj, property)) {
+//       count++;
+//     }
+//   }
 
-  return count;
-}
+//   return count;
+// }
 
 /**
  *
@@ -22,6 +22,8 @@ function countProperties(obj) {
  */
 function isEmpty(obj) {
   for (const key in obj) {
+    // TODO Add Reasons
+    /* istanbul ignore else */
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
       return false;
     }
@@ -29,4 +31,4 @@ function isEmpty(obj) {
   return true;
 }
 
-module.exports = {countProperties, isEmpty};
+module.exports = {isEmpty};

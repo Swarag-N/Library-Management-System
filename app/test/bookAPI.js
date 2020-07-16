@@ -29,10 +29,7 @@ describe('API OF BOOKS', ()=>{
               NEW_BOOK_ID = body._id;
               expect(body).to.be.an('object');
             })
-            .end((err) => {
-              if (err) return done(err);
-              done();
-            });
+            .end(done);
       });
 
       it('add book with partial info', (done)=>{
@@ -42,15 +39,11 @@ describe('API OF BOOKS', ()=>{
             .send(data)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            .expect(400)
             .expect((res)=>{
               const {body} = res;
               expect(body).to.have.property('message');
             })
-            .end((err) => {
-              if (err) return done(err);
-              done();
-            });
+            .expect(400, done);
       });
 
       it('add book with no info', (done)=>{
@@ -59,16 +52,12 @@ describe('API OF BOOKS', ()=>{
             .send({})
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            .expect(406)
             .expect((res)=>{
               const {body} = res;
               expect(body).to.be.an('object');
               expect(body).to.have.property('message');
             })
-            .end((err) => {
-              if (err) return done(err);
-              done();
-            });
+            .expect(406, done);
       });
     });
   });
@@ -162,7 +151,7 @@ describe('API OF BOOKS', ()=>{
           .expect(204, done);
     });
 
-    it('delete with wrond id', (done)=>{
+    it('delete with wrong id', (done)=>{
       request(app)
           .delete('/api/books/falseID')
           .expect(400, done);

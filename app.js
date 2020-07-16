@@ -14,10 +14,11 @@ const app = express();
 app.set('views', path.join(__dirname, 'app', 'views'));
 app.set('view engine', 'ejs');
 
+/* istanbul ignore if */
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));
-  // const adminRouter = require('./app/routes/adminRouter');
-  // app.use('/admin', adminRouter);
+  const adminRouter = require('./app/routes/adminRouter');
+  app.use('/admin', adminRouter);
 }
 
 // Database Connections
@@ -25,9 +26,6 @@ const MongoDataBase = process.env.MONGO_URl || 'mongodb://localhost:27017/lms';
 mongoose.connect(MongoDataBase, {
   useNewUrlParser: true,
   useUnifiedTopology: true},
-    // ,() => {
-    //     console.log("Database Connection to lms ")
-    // }
 );
 
 // for  deprecationWarning: Mongoose: `findOneAndUpdate()` and `findOneAndDelete()` without the `useFindAndModify`
@@ -56,6 +54,12 @@ app.use(session({
 }));
 
 app.use('/', indexRouter);
+
+app.get('*', function(req, res) {
+  res.status(404).json({
+    message: 'Endpoint You are looking for is not defined',
+  });
+});
 
 // error handler
 // catch 404 and forward to error handler
