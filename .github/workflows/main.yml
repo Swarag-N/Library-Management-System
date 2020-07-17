@@ -31,7 +31,7 @@ jobs:
     - name: Coveralls Parallel
       uses: coverallsapp/github-action@master
       with:
-        github-token: ${{ secrets.REPO_TOKEN }}
+        github-token: ${{ secrets.repo_token }}
         flag-name: run-${{ matrix.node-version }}-${{ matrix.mongodb-version }}
         parallel: true
   
@@ -42,5 +42,5 @@ jobs:
       - name: Coveralls Finished
         uses: coverallsapp/github-action@master
         with:
-          github-token: ${{ secrets.REPO_TOKEN }}
+          github-token: ${{ secrets.repo_token }}
           parallel-finished: true
