@@ -26,21 +26,28 @@ jobs:
 
     - run: npm install -D
 
-    - run: npm run coveralls
-
-    - name: Coveralls Parallel
-    uses: coverallsapp/github-action@master
-    with:
-      github-token: ${{ secrets.REPO_TOKEN }}
-      flag-name: run-${{ matrix.node-version }}-${{ matrix.mongodb-version }}
-      parallel: true
-
-finish:
-  needs: build
-  runs_on: ubuntu-latest
-  steps:
-    - name: Coveralls Finished
-    uses: coverallsapp/github-action@master
-    with:
-      github-token: ${{ secrets.REPO_TOKEN }}
-      parallel-finished: true
+    - run: npm run coverage
+  
+  finish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Git checkout
+      uses: actions/checkout@v1
+    
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2.1.0
+      
+    - name: MongoDB in GitHub Actions
+      uses: supercharge/mongodb-github-action@1.3.0
+      
+    - run: npm install -D
+      
+    - name: Test and Coverage
+      env:
+        COVERALLS_SERVICE_NAME: GITHUB Actions
+        COVERALLS_REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+        COVERALLS_GIT_BRANCH: master
+      run: npm run coveralls
+    
