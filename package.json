@@ -10,8 +10,9 @@
     "lint-fix": "npm run lint -- --fix",
     "pretest": "npm run lint && npm run seed",
     "coverage": "nyc npm run test",
-    "report":"nyc report --reporter=text --reporter=html",
-    "dev": "nodemon ./app/bin/www"
+    "report": "nyc report --reporter=text --reporter=html",
+    "dev": "nodemon ./app/bin/www",
+    "coveralls":"npm run coverage && nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
     "admin-bro": "^2.8.0",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "coveralls": "^3.1.0",
     "eslint": "^7.4.0",
     "eslint-config-google": "^0.14.0",
     "faker": "^4.1.0",
@@ -38,16 +40,26 @@
     "supertest": "^4.0.2"
   },
   "eslintConfig": {
-    "extends": ["eslint:recommended", "google"],
+    "extends": [
+      "eslint:recommended",
+      "google"
+    ],
     "env": {
-        "node" : true,
-        "es6":true
+      "node": true,
+      "es6": true
     },
     "parserOptions": {
       "ecmaVersion": 2018
     },
-    "rules" : {
-      "max-len": [2, 120, 4, {"ignoreUrls": true}],
+    "rules": {
+      "max-len": [
+        2,
+        120,
+        4,
+        {
+          "ignoreUrls": true
+        }
+      ],
       "no-console": 0
     }
   },

@@ -1,6 +1,7 @@
 # A library book management system API #
 
 ![Run tests](https://github.com/Swarag-N/Library-Management-System/workflows/Run%20tests/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/Swarag-N/Library-Management-System/badge.svg?branch=master)](https://coveralls.io/github/Swarag-N/Library-Management-System?branch=master)
 
 `See Docs of` [Library-Management-System](https://swarag-n.github.io/Library-Management-System/)
 
