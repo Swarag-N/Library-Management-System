@@ -26,4 +26,21 @@ jobs:
 
     - run: npm install -D
 
-    - run: npm test
+    - run: npm run coveralls
+
+    - name: Coveralls Parallel
+    uses: coverallsapp/github-action@master
+    with:
+      github-token: ${{ secrets.REPO_TOKEN }}
+      flag-name: run-${{ matrix.node-version }}-${{ matrix.mongodb-version }}
+      parallel: true
+
+finish:
+  needs: build
+  runs_on: ubuntu-latest
+  steps:
+    - name: Coveralls Finished
+    uses: coverallsapp/github-action@master
+    with:
+      github-token: ${{ secrets.REPO_TOKEN }}
+      parallel-finished: true
