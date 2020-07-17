@@ -22,7 +22,7 @@ function escapeRegex(text) {
  *
  * @return {object}
  */
-function searchParams(name='', cbNum=0, genr='', lte=false) {
+function searchParams(name, cbNum, genr, lte) {
   return ({
     name: escapeRegex(name),
     cupBoardNumber: lte?{$lte: cbNum}:{$gte: cbNum},
@@ -54,7 +54,6 @@ function sanitizeQueryParams(request, response, next) {
   let message = '';
   const {query} = request;
   for (const key of Object.keys(query)) {
-    console.log(key, request.query[key]);
     if (TO_BE_NUMBERS.includes(key)) {
       if (Number(query[key])) {
         request.query[key] = Number(request.query[key]);

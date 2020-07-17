@@ -44,6 +44,27 @@ describe('Query PARAMETERS', ()=>{
           })
           .expect(200, done);
     });
+    it('string passed as Param', (done)=>{
+      request(app)
+          .get('/api/books?page=randomValue')
+          .expect((res)=>{
+            const {body} = res;
+            expect(body).to.be.an('object');
+            expect(body).to.have.property('message');
+          })
+          .expect(400, done);
+    });
+
+    it('empty value is passed Param', (done)=>{
+      request(app)
+          .get('/api/books?page')
+          .expect((res)=>{
+            const {body} = res;
+            expect(body).to.be.an('object');
+            expect(body).to.have.property('message');
+          })
+          .expect(400, done);
+    });
   });
 
   describe('Name', ()=>{
@@ -68,6 +89,17 @@ describe('Query PARAMETERS', ()=>{
           })
           .expect(200, done);
     });
+
+    it('empty name is Passed', (done)=>{
+      request(app)
+          .get('/api/books?name')
+          .expect((res)=>{
+            const {body} = res;
+            expect(body).to.be.an('object');
+            expect(body).to.have.property('message');
+          })
+          .expect(400, done);
+    });
   });
 
   describe('Genre', ()=>{
@@ -91,6 +123,17 @@ describe('Query PARAMETERS', ()=>{
             expect(body['books'].length>=1).to.be.true;
           })
           .expect(200, done);
+    });
+
+    it('empty genre is Passed', (done)=>{
+      request(app)
+          .get('/api/books?genr')
+          .expect((res)=>{
+            const {body} = res;
+            expect(body).to.be.an('object');
+            expect(body).to.have.property('message');
+          })
+          .expect(400, done);
     });
   });
 
@@ -127,6 +170,17 @@ describe('Query PARAMETERS', ()=>{
           })
           .expect(200, done);
     });
+
+    it('empty value is passed sort', (done)=>{
+      request(app)
+          .get('/api/books?sort')
+          .expect((res)=>{
+            const {body} = res;
+            expect(body).to.be.an('object');
+            expect(body).to.have.property('message');
+          })
+          .expect(400, done);
+    });
   });
 
   describe('CBN', ()=>{
@@ -161,6 +215,28 @@ describe('Query PARAMETERS', ()=>{
             expect(body['books'].every((book)=>book.cupBoardNumber>CBN)).to.be.true;
           })
           .expect(200, done);
+    });
+
+    it('string passed as Param', (done)=>{
+      request(app)
+          .get('/api/books?cbNum=randomstring')
+          .expect((res)=>{
+            const {body} = res;
+            expect(body).to.be.an('object');
+            expect(body).to.have.property('message');
+          })
+          .expect(400, done);
+    });
+
+    it('empty cbNum is Passed', (done)=>{
+      request(app)
+          .get('/api/books?cbNum')
+          .expect((res)=>{
+            const {body} = res;
+            expect(body).to.be.an('object');
+            expect(body).to.have.property('message');
+          })
+          .expect(400, done);
     });
   });
 
@@ -197,6 +273,30 @@ describe('Query PARAMETERS', ()=>{
             expect(body['books'].every((book)=>book.cupBoardNumber<CBN)).to.be.true;
           })
           .expect(200, done);
+    });
+
+    it('empty value is passed in lte', (done)=>{
+      request(app)
+          .get('/api/books?lte')
+          .expect((res)=>{
+            const {body} = res;
+            expect(body).to.be.an('object');
+            expect(body).to.have.property('message');
+          })
+          .expect(400, done);
+    });
+  });
+
+  describe('MISC', ()=>{
+    it('wrong Param passed', (done)=>{
+      request(app)
+          .get('/api/books?randomParam=randomValue')
+          .expect((res)=>{
+            const {body} = res;
+            expect(body).to.be.an('object');
+            expect(body).to.have.property('message');
+          })
+          .expect(400, done);
     });
   });
 });

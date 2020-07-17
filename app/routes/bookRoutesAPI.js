@@ -12,7 +12,7 @@ const NUM_RESULTS = 10;
 // INDEX READ
 router.get('/', sanitizeQueryParams, function(req, res) {
   const {page=1, name='', cbNum=0, genr='', sort='asc', lte=false} = req.query;
-  /* istanbul ignore else */
+  /* istanbul ignore next */
   if (process.env.NODE_ENV === 'development') {
     console.table({page, name, cbNum, genr, sort, lte});
   }
@@ -26,10 +26,12 @@ router.get('/', sanitizeQueryParams, function(req, res) {
       },
       limit: NUM_RESULTS,
       skip: NUM_RESULTS*(page-1)}, (onerror, foundBooks) => {
+      /* istanbul ignore if */
       if (onerror) {
         res.status(500).json(createError(500));
       } else {
         Book.find({...findData}).countDocuments((err, total)=>{
+          /* istanbul ignore if */
           if (err) {
             res.status(500).json(createError(500));
           } else {
