@@ -22,18 +22,24 @@ for (let i=0; i<=NUM_RECORDS; i++) {
     genre: faker.random.word(),
   };
   Book.create(newBook, (err, savedBook)=>{
-    if (err) throw err;
-    console.log(savedBook.id);
-    if (i===NUM_RECORDS) {
-      process.exit();
+    /* istanbul ignore if */
+    if (err) {
+      throw err;
+    } else {
+      console.log(savedBook.id);
+      if (i===NUM_RECORDS) {
+        process.exit();
+      }
     }
   });
 }
 
 process.on('exit', function(code) {
   mongoose.connection.close();
+  /* istanbul ignore else */
   if (code===0) {
     return console.log('\n Data Added TO DB');
+  } else {
+    return console.log(`About to exit with code ${code}`);
   }
-  return console.log(`About to exit with code ${code}`);
 });

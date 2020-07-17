@@ -5,16 +5,19 @@ const router = new express.Router();
 const Book = require('../models/bookModel.js');
 
 const {isEmpty} = require('../utils/seralizeer.help');
-const {searchParams, isSortInValid} = require('../utils/search.serializer');
+const {searchParams, sanitizeQueryParams, isSortInValid} = require('../utils/search.serializer');
 
 const NUM_RESULTS = 10;
 
 // INDEX READ
-router.get('/', function(req, res) {
+router.get('/', sanitizeQueryParams, function(req, res) {
   const {page=1, name='', cbNum=0, genr='', sort='asc', lte=false} = req.query;
-  process.env.NODE_ENV === 'development' && console.table({page, name, cbNum, genr, sort, lte});
+  /* istanbul ignore else */
+  if (process.env.NODE_ENV === 'development') {
+    console.table({page, name, cbNum, genr, sort, lte});
+  }
   if (isSortInValid(sort)) {
-    res.status(400).json(createError(400, `sort must be one of asc desc`));
+    res.status(400).json(createError(400, `sort must be one of asc and desc`));
   } else {
     const findData = searchParams(name, cbNum, genr, lte);
     Book.find(findData, null, {
