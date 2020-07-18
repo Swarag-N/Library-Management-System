@@ -20,7 +20,7 @@ Lists all the Books in DB. Query Parameters are [here](/bookQuery.md)
 
 #### Request `GET /api/books/` ####
 
-```properties
+```console
 curl --location --request GET 'localhost:7894/api/books/'
 ```
 
@@ -114,7 +114,7 @@ Shows The Book Requested
 
 #### Request `GET /api/books/:id` ####
 
-```properties
+```console
 curl --location --request GET 'localhost:7894/api/books/5e7fc914cb2d74473c3ee4c0'
 ```
 
@@ -138,7 +138,7 @@ Creates A Book and Sends the Created Book
 
 #### Request `POST /api/books/:id` ####
 
-```properties
+```console
 curl --location --request POST 'localhost:7894/api/books/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -168,7 +168,7 @@ Updates the Book by  ID and Sends the Updated Book
 
 #### Request `PUT /api/books/:id/edit` ####
 
-```properties
+```console
 curl --location --request PUT 'localhost:7894/api/books/5f0e9ff99221a82888bdc8cb/edit' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -196,12 +196,12 @@ Deletes the Book by ID Send JSON Response.
 
 #### Request `DELETE /api/books/:id` ####
 
-```properties
+```console
 curl --location --request DELETE 'localhost:7894/api/books/5e7fc914cb2d74473c3ee4c2'
 ```
 
 #### Response `DELETE /api/books/:id` ####
 
-``` properties
+``` console
 StatusCode 204 is Sent
 ```

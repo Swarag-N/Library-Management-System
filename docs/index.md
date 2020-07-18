@@ -17,6 +17,9 @@ npm run start //Starts in localhost:7894
 [`/api/books`](endpoints/books.md)
 Retrieve and query books
 
+[`/api/books?query=param`](endpoints/bookQuery.md)
+Retrieve and query books
+
 [`/admin`](endpoints/admin.md)
 GUI Interface of Data in MongoDB
 

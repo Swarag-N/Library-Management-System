@@ -9,25 +9,15 @@
 
 ## Completed Tasks ##
 
-- [x] CRUD
-- [x] Admin Panel
-- [x] Auth to Admin Panel
-- [x] Making the Project RESTfull Api
-- [x] ES Lint Configuration
-- [x] Project Restructure
+- [x] RESTfull Api
+- [x] CRUD Routes
+- [x] Paginated Results
+- [x] Filter Routes
+- [x] Admin Panel with Authentication
 - [x] Postman Requests
-- [x] Format to Only JSON API
-- [x] Add Filter
-- [x] Add Pagination
 
 ## Todo ##
 
-### Minor Refinements ###
-
-- [ ] Added Docs //for filter routes
-- [ ] Tests
-
-### Major Design Changes ###
-
-- [ ] Add JWT Auth
-- [ ] Add Rack Model
+- [ ] User Model
+- [ ] JWT Auth
+- [ ] Config for Deployment

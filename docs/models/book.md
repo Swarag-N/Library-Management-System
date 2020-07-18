@@ -1,4 +1,6 @@
-# `Book` Model
+# `Book` Model ##
+
+[Home](../index.md)
 
 | Key       | Type          | Description |
 | --------- | ------------- | ----------- |

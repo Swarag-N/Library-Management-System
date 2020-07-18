@@ -2,6 +2,8 @@
 
 To see CRUD [routes](/books.md)
 
+To Root [Home](../index.md)
+
 |Parameter|Query|Type|Options|Default|Description|
 |---|---|---|---|---|---|
 |[Page Number](#Page-Number)|`page`|Number| `>1` |`1`|Each Page Is Limited to return 10 results, for more results pass page number|
