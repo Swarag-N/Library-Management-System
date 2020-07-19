@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./app/bin/www",
-    "test": "cd app && mocha --recursive --exit",
+    "test": "cd app && mocha",
     "seed": "node ./app/utils/seed.js",
     "lint": "eslint .",
     "lint-fix": "npm run lint -- --fix",
@@ -38,6 +38,10 @@
     "mocha": "^8.0.1",
     "nyc": "^15.1.0",
     "supertest": "^4.0.2"
+  },
+  "mocha": {
+    "recursive": true,
+    "exit": true
   },
   "eslintConfig": {
     "extends": [

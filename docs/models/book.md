@@ -1,4 +1,4 @@
-# `Book` Model ##
+# `Book` Model #
 
 [Home](../index.md)
 

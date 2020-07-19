@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const db = require('./app/db/index.db');
 
 const indexRouter = require('./app/routes/index');
 
@@ -17,23 +17,11 @@ app.set('view engine', 'ejs');
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));
-  const adminRouter = require('./app/routes/adminRouter');
+  const adminRouter = require('./app/routes/admin.router');
   app.use('/admin', adminRouter);
 }
 
-// Database Connections
-const MongoDataBase = process.env.MONGO_URl || 'mongodb://localhost:27017/lms';
-mongoose.connect(MongoDataBase, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true},
-);
-
-// for  deprecationWarning: Mongoose: `findOneAndUpdate()` and `findOneAndDelete()` without the `useFindAndModify`
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
-mongoose.set('useUnifiedTopology', true);
-
+db.connectToDB();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));

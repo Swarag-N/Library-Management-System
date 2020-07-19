@@ -1,17 +1,11 @@
 const faker = require('faker');
 const mongoose = require('mongoose');
-const Book = require('../models/bookModel');
+const Book = require('../db/models/book.model');
+const db = require('../db/index.db');
 
 const NUM_RECORDS = 100;
 
-const MongoDataBase = process.env.MONGO_URl ||'mongodb://localhost:27017/lms';
-mongoose.connect(MongoDataBase,
-    {useNewUrlParser: true,
-      useUnifiedTopology: true,
-    },
-    async ()=>{
-      console.log('Database Connection to lms ');
-    });
+db.connectToDB();
 
 faker.seed(7894);
 
