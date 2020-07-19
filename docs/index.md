@@ -25,5 +25,5 @@ GUI Interface of Data in MongoDB
 
 ## Models
 
-[`Book`](models\book.md)
+[`Book`](models/book.md)
 A Book Model
