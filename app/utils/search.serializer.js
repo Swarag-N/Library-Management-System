@@ -1,5 +1,4 @@
 const ACCEPTED_SORT_WORDS = ['asc', 'desc', 'ascending', 'descending', '1', '-1'];
-
 const TO_BE_NUMBERS = ['page', 'cbNum'];
 const TO_BE_STRING = ['name', 'genr', 'cbNum', 'sort'];
 const TO_BE_BOOLEAN = ['lte'];

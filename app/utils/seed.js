@@ -2,14 +2,13 @@ const faker = require('faker');
 const mongoose = require('mongoose');
 const Book = require('../db/models/book.model');
 const db = require('../db/index.db');
-
-const NUM_RECORDS = 100;
-
 db.connectToDB();
 
-faker.seed(7894);
+const DB = require('../config/db.config');
+const NUMRECORDS = DB.NUM_RECORDS;
+faker.seed(DB.FAKER_SEED);
 
-for (let i=0; i<=NUM_RECORDS; i++) {
+for (let i=0; i<=NUMRECORDS; i++) {
   const newBook={
     name: faker.random.words(),
     cupBoardNumber: faker.random.number(),
@@ -21,7 +20,7 @@ for (let i=0; i<=NUM_RECORDS; i++) {
       throw err;
     } else {
       console.log(savedBook.id);
-      if (i===NUM_RECORDS) {
+      if (i===NUMRECORDS) {
         process.exit();
       }
     }

@@ -25,14 +25,14 @@
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.1",
-    "http-errors": "~1.6.3",
-    "mongoose": "^5.9.24",
+    "http-errors": "^1.8.0",
+    "mongoose": "^5.9.25",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "coveralls": "^3.1.0",
-    "eslint": "^7.4.0",
+    "eslint": "^7.5.0",
     "eslint-config-google": "^0.14.0",
     "faker": "^4.1.0",
     "mocha": "^8.0.1",
