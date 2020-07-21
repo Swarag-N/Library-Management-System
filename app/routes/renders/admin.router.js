@@ -1,7 +1,7 @@
 const AdminBro = require('admin-bro');
 const adminBroExpress = require('admin-bro-expressjs');
 const adminBroMongoose = require('admin-bro-mongoose');
-const Book = require('../db/models/book.model');
+const Book = require('../../db/models/book.model');
 const express = require('express');
 
 AdminBro.registerAdapter(adminBroMongoose);

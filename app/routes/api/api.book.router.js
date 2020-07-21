@@ -2,10 +2,10 @@ const express = require('express');
 const createError = require('http-errors');
 
 const router = new express.Router();
-const Book = require('../db/models/book.model.js');
+const Book = require('../../db/models/book.model.js');
 
-const {isEmpty} = require('../utils/seralizeer.help');
-const {searchParams, sanitizeQueryParams, isSortInValid} = require('../utils/search.serializer');
+const {isEmpty} = require('../../utils/seralizeer.help');
+const {searchParams, sanitizeQueryParams, isSortInValid} = require('../../utils/search.serializer');
 
 const NUM_RESULTS = 10;
 

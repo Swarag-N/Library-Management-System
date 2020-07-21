@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
+
 const db = require('./app/db/index.db');
 
 const indexRouter = require('./app/routes/index');
@@ -17,7 +19,7 @@ app.set('view engine', 'ejs');
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));
-  const adminRouter = require('./app/routes/admin.router');
+  const adminRouter = require('./app/routes/renders/admin.router');
   app.use('/admin', adminRouter);
 }
 
@@ -31,7 +33,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
-
+app.use(helmet());
 
 app.use(session({
   secret: 'keyboard cat',
