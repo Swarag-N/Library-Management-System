@@ -15,9 +15,11 @@
 - [x] Filter Routes
 - [x] Admin Panel with Authentication
 - [x] Postman Requests
+- [x] User Model
+- [x] JWT Auth
+- [x] Config for Deployment
 
 ## Todo ##
 
-- [ ] User Model
-- [ ] JWT Auth
-- [ ] Config for Deployment
+- [ ] Middlewares to Authenticate and Authorize
+- [ ] Add Tests for User Routes

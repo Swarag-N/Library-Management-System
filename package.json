@@ -28,7 +28,9 @@
     "express-session": "^1.17.1",
     "helmet": "^3.23.3",
     "http-errors": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.25",
+    "mongoose-validator": "^2.1.0",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
