@@ -1,6 +1,6 @@
 {
   "name": "librarymanagemeentsystem",
-  "version": "1.1.1",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "start": "node ./app/bin/www",
