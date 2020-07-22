@@ -17,6 +17,7 @@ const DB_OPTIONS = {
  */
 function connectToDB() {
   mongoose.connect(DB.MONGO_URl, {...DB_OPTIONS})
+  /* istanbul ignore next */
       .catch((err)=>{
         throw err;
       });

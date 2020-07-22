@@ -27,16 +27,25 @@ const userSchema = new mongoose.Schema({
     trim: true,
     index: true,
   },
+// });
 }, {
-  toObject: {virtuals: true},
+  // toObject: {virtuals: true},
   toJSON: {virtuals: true},
 },
 );
 
 
-userSchema.virtual('fullname').get(() => {
-  return [this.firstname, this.lastname].filter(Boolean).join(' ');
-});
+// userSchema.virtual('fullname').get(() => (`${this.firstname} ${this.lastname}`));
+userSchema.virtual('fullName').
+    get(function() {
+      return `${this.firstname} ${this.lastname}`;
+    }).
+    set(function(v) {
+    // `v` is the value being set, so use the value to set
+      const firstname = v.substring(0, v.indexOf(' '));
+      const lastname = v.substring(v.indexOf(' ') + 1);
+      this.set({firstname, lastname});
+    });
 
 userSchema.pre('save', function(next) {
   if (this.password) {

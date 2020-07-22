@@ -23,25 +23,34 @@ router.post('/signUp', (request, response)=>{
 
 router.post('/login', (request, response)=>{
   const {username, password} = request.body;
-  if (password !== null && password !== undefined) {
+  // const valid = (password !== null && password !== undefined);
+  // console.log('******************************', valid);
+  if (password && username) {
     User.findOne({username}, (onerror, foundUser)=>{
       if (onerror) {
-        response.status(404).json(createError(404, 'No User Exists'));
+        response.status(500).json(createError(500));
       } else {
-        bcrypt.compare(password, foundUser.password)
-            .then(function(result) {
-              if (result) {
-                jwt.sign({id: foundUser._id}, AUTH.JWT_PK, {algorithm: 'HS256'}, (err, token)=>{
-                  response.json({message: 'Successful', token: token});
-                });
-              } else {
-                response.status(400).json(createError(400, 'Wrong Password'));
-              }
-            });
+        if (foundUser) {
+          bcrypt.compare(password, foundUser.password)
+              .then(function(result) {
+                if (result) {
+                  jwt.sign({id: foundUser._id}, AUTH.JWT_PK, {algorithm: 'HS256'}, (err, token)=>{
+                    response.json({message: 'Successful', token: token});
+                  });
+                } else {
+                  response.status(400).json(createError(400, 'Wrong Password'));
+                }
+              })
+              .catch((err)=>{
+                response.status(500).json(createError(500, err.message));
+              });
+        } else {
+          response.status(404).json(createError(404, 'No User Exists'));
+        }
       }
     });
   } else {
-    response.status(400).json(createError(400, 'Password No Sent'));
+    response.status(400).json(createError(400, `${username?'password':'username'} Not Sent`));
   }
 });
 

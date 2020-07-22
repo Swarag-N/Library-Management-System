@@ -3,6 +3,7 @@ const router = new express.Router();
 
 const bookRouterAPI = require('./api/api.book.router');
 const authRouterAPI = require('./api/api.auth.router');
+const userRouterAPI = require('./api/api.account.router');
 
 // Use middleware to set the default Content-Type
 router.use((req, res, next)=>{
@@ -12,6 +13,7 @@ router.use((req, res, next)=>{
 
 router.use('/api/books', bookRouterAPI);
 router.use('/api/auth', authRouterAPI);
+router.use('/api/account', userRouterAPI);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

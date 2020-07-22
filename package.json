@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node ./app/bin/www",
     "test": "cd app && mocha",
+    "mocha": "cd app && mocha",
     "seed": "node ./app/utils/seed.js",
     "lint": "eslint .",
     "lint-fix": "npm run lint -- --fix",
