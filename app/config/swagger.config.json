@@ -1,0 +1,14 @@
+{
+    "swaggerDefinition": {
+      "info": {
+        "version": "0.1.0",
+        "title": "Library-Management-System API",
+        "description": "Library-Management-System API Information",
+        "contact": {
+          "name": "Swarag"
+        },
+        "servers": ["http://localhost:7894"]
+      }
+    },
+    "apis": ["./app/routes/index.js", "./app/routes/api/*.js"]
+}

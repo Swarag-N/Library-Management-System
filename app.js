@@ -5,12 +5,18 @@ const logger = require('morgan');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 const db = require('./app/db/index.db');
-
 const indexRouter = require('./app/routes/index');
+const swaggerOptions = require('./app/config/swagger.config');
 
 const app = express();
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app', 'views'));

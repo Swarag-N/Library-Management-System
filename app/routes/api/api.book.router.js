@@ -10,6 +10,43 @@ const {searchParams, sanitizeQueryParams, isSortInValid} = require('../../utils/
 const NUM_RESULTS = 10;
 
 // INDEX READ
+/**
+ * @swagger
+ * /api/books/:
+ *  get:
+ *    description: List of the Books
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ *    parameters:
+ *      - in: query
+ *        name: page
+ *        type: int
+ *        description: page of query
+ *        summary: page of query
+ *      - in: query
+ *        name: name
+ *        type: string
+ *        description: name of the book
+ *      - in: query
+ *        name: cbNum
+ *        type: string
+ *        description: name of the book
+ *      - in: query
+ *        name: genr
+ *        type: string
+ *        description: genre of the book
+ *      - in: query
+ *        name: sort
+ *        type: string
+ *        description: genre of the book
+ *        enum: [asc, desc]
+ *      - in: query
+ *        name: lte
+ *        type: boolean
+ *        description: on giving cupboard number(cbNum)  results are  (n>cbNum), if lte is passed results are (n<cbNum)
+ *
+ */
 router.get('/', sanitizeQueryParams, function(req, res) {
   const {page=1, name='', cbNum=0, genr='', sort='asc', lte=false} = req.query;
   /* istanbul ignore next */
