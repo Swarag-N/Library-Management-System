@@ -14,7 +14,10 @@ const NUM_RESULTS = 10;
  * @swagger
  * /api/books/:
  *  get:
+ *    tags:
+ *      - Books
  *    description: List of the Books
+ *    summary: LIST
  *    responses:
  *      '200':
  *        description: A successful response
@@ -84,6 +87,27 @@ router.get('/', sanitizeQueryParams, function(req, res) {
 
 
 // CREATE
+/**
+ * @swagger
+ * paths:
+ *  /api/books/:
+ *   post:
+ *     tags:
+ *       - Books
+ *     description: Add a new Book
+ *     summary: CREATE
+ *     parameters:
+ *      - in: body
+ *        name: Book
+ *        required: true
+ *        schema:
+ *          type: object
+ *     responses:
+ *       '201':
+ *         description: Successful response
+ *       '406':
+ *         description: Empty Body
+ */
 router.post('/', (request, response, next) => {
   if (isEmpty(request.body)) {
     const err = createError(406);
@@ -101,6 +125,26 @@ router.post('/', (request, response, next) => {
 
 
 // SHOW READ
+/**
+ * @swagger
+ * paths:
+ *  /api/books/{id}:
+ *   get:
+ *     tags:
+ *       - Books
+ *     description: Read Book
+ *     summary: READ
+ *     parameters:
+ *      - in: path
+ *        name: Book_id
+ *        required: true
+ *        type: string
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *       '404':
+ *         description: Book Not Found
+ */
 router.get('/:id', (request, response) => {
   Book.findById(request.params.id, (onerror, foundBook) => {
     if (onerror) {
@@ -113,6 +157,21 @@ router.get('/:id', (request, response) => {
 
 
 // UPDATE
+/**
+ * @swagger
+ * paths:
+ *  /api/books/{id}/edit:
+ *   put:
+ *     tags:
+ *       - Books
+ *     description: Update Books
+ *     summary: UPDATE
+ *     responses:
+ *       '201':
+ *         description: Successful response
+ *       '406':
+ *         description: Empty Body
+ */
 router.put('/:id/edit', (request, response) => {
   if (isEmpty(request.body)) {
     response.status(406).json(createError(406));
@@ -134,6 +193,21 @@ router.put('/:id/edit', (request, response) => {
 
 
 // DELETE
+/**
+ * @swagger
+ * paths:
+ *  /api/books/{id}:
+ *   delete:
+ *     tags:
+ *       - Books
+ *     description: Delete Books
+ *     summary: DELETE
+ *     responses:
+ *       '201':
+ *         description: Successful response
+ *       '406':
+ *         description: Empty Body
+ */
 router.delete('/:id', (request, response) => {
   Book.findByIdAndDelete(request.params.id, (onerror) => {
     if (onerror) {

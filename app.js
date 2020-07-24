@@ -25,8 +25,8 @@ app.set('view engine', 'ejs');
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));
-  const adminRouter = require('./app/routes/renders/admin.router');
-  app.use('/admin', adminRouter);
+  // const adminRouter = require('./app/routes/renders/admin.router');
+  // app.use('/admin', adminRouter);
 }
 
 db.connectToDB();

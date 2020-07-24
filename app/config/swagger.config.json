@@ -7,8 +7,14 @@
         "contact": {
           "name": "Swarag"
         },
-        "servers": ["http://localhost:7894"]
+        "servers": ["http://localhost:7894"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+            "application/json"
+        ]
       }
     },
-    "apis": ["./app/routes/index.js", "./app/routes/api/*.js"]
+    "apis": ["./app/routes/index.js", "./app/routes/api/*.js","./app/db/models/book.model.js"]
 }

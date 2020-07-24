@@ -13,7 +13,8 @@
     "coverage": "nyc npm run test",
     "report": "nyc report --reporter=text --reporter=html",
     "dev": "nodemon ./app/bin/www",
-    "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
+    "docs": "spectacle -d ./app/config/swagger.config.json "
   },
   "dependencies": {
     "admin-bro": "^2.8.0",
