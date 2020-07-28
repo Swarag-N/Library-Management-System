@@ -1,21 +1,21 @@
 $(function() {
   // $(document).foundation();
 
-  var $sidebar = $('#sidebar');
+  const $sidebar = $('#sidebar');
   if ($sidebar.length) {
-    var $docs = $('#docs');
-    var $nav = $sidebar.find('nav');
+    const $docs = $('#docs');
+    const $nav = $sidebar.find('nav');
 
     //
     // Setup sidebar navigation
-    var traverse = new Traverse($nav, {
+    const traverse = new Traverse($nav, {
       threshold: 10,
-      barOffset: $sidebar.position().top
+      barOffset: $sidebar.position().top,
     });
 
     $nav.on('update.traverse', function(event, element) {
       $nav.find('section').removeClass('expand');
-      var $section = element.parents('section:first');
+      const $section = element.parents('section:first');
       if ($section.length) {
         $section.addClass('expand');
       }
@@ -23,23 +23,23 @@ $(function() {
 
     //
     // Bind the drawer layout
-    var $drawerLayout = $('.drawer-layout'),
-      $drawer = $drawerLayout.find('.drawer'),
-      closeDrawer = function() {
-        $drawer.removeClass('slide-right slide-left');
-        $drawer.find('.drawer-overlay').remove();
-        $drawerLayout.removeClass('drawer-open drawer-slide-left-large drawer-slide-right-large');
-        return false;
-      };
+    const $drawerLayout = $('.drawer-layout');
+    const $drawer = $drawerLayout.find('.drawer');
+    const closeDrawer = function() {
+      $drawer.removeClass('slide-right slide-left');
+      $drawer.find('.drawer-overlay').remove();
+      $drawerLayout.removeClass('drawer-open drawer-slide-left-large drawer-slide-right-large');
+      return false;
+    };
 
     // Drawer open buttons
     $drawerLayout.find('[data-drawer-slide]').click(function(e) {
-      var $this = $(this),
-        direction = $this.data('drawer-slide');
+      const $this = $(this);
+      const direction = $this.data('drawer-slide');
       $drawerLayout.addClass('drawer-open');
       $drawer.addClass('slide-' + direction);
 
-      var $overlay = $('<a href="#" class="drawer-overlay"></a>')
+      const $overlay = $('<a href="#" class="drawer-overlay"></a>');
       $drawer.append($overlay);
       $overlay.click(closeDrawer);
 
@@ -60,7 +60,7 @@ $(function() {
  */
 function Traverse(element, options) {
   this.$element = element;
-  this.options  = $.extend({}, Traverse.defaults, this.$element.data(), options);
+  this.options = $.extend({}, Traverse.defaults, this.$element.data(), options);
 
   this._init();
 }
@@ -104,7 +104,7 @@ Traverse.defaults = {
    * @option
    * @example 25
    */
-  barOffset: 0
+  barOffset: 0,
 };
 
 /**
@@ -112,14 +112,14 @@ Traverse.defaults = {
  * @private
  */
 Traverse.prototype._init = function() {
-  var id = this.$element[0].id, // || Foundation.GetYoDigits(6, 'traverse'),
-      _this = this;
+  const id = this.$element[0].id; // || Foundation.GetYoDigits(6, 'traverse'),
+  const _this = this;
   this.$targets = $('[data-traverse-target]');
   this.$links = this.$element.find('a');
   this.$element.attr({
     'data-resize': id,
     'data-scroll': id,
-    'id': id
+    'id': id,
   });
   this.$active = $();
   this.scrollPos = parseInt(window.pageYOffset, 10);
@@ -132,18 +132,18 @@ Traverse.prototype._init = function() {
  * Can be invoked if new elements are added or the size of a location changes.
  * @function
  */
-Traverse.prototype.calcPoints = function(){
-  var _this = this,
-      body = document.body,
-      html = document.documentElement;
+Traverse.prototype.calcPoints = function() {
+  const _this = this;
+  const body = document.body;
+  const html = document.documentElement;
 
   this.points = [];
   this.winHeight = Math.round(Math.max(window.innerHeight, html.clientHeight));
   this.docHeight = Math.round(Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight));
 
-  this.$targets.each(function(){
-    var $tar = $(this),
-        pt = $tar.offset().top; // Math.round($tar.offset().top - _this.options.threshold);
+  this.$targets.each(function() {
+    const $tar = $(this);
+    const pt = $tar.offset().top; // Math.round($tar.offset().top - _this.options.threshold);
     $tar.targetPoint = pt;
     _this.points.push(pt);
   });
@@ -154,14 +154,14 @@ Traverse.prototype.calcPoints = function(){
  * @private
  */
 Traverse.prototype._events = function() {
-  var _this = this,
-      $body = $('html, body'),
-      opts = {
-        duration: _this.options.animationDuration,
-        easing:   _this.options.animationEasing
-      };
+  const _this = this;
+  const $body = $('html, body');
+  const opts = {
+    duration: _this.options.animationDuration,
+    easing: _this.options.animationEasing,
+  };
 
-  $(window).one('load', function(){
+  $(window).one('load', function() {
     _this.calcPoints();
     _this._updateActive();
 
@@ -170,24 +170,24 @@ Traverse.prototype._events = function() {
     }).scroll(function(e) {
       _this._updateActive();
     });
-  })
+  });
 
-  this.$element.on('click', 'a[href^="#"]', function(e) { //'click.zf.traverse'
-      e.preventDefault();
-      var arrival   = this.getAttribute('href').replace(/\./g, "\\."),
-          scrollPos = $(arrival).offset().top - _this.options.barOffset; // - _this.options.threshold / 2 - _this.options.barOffset;
+  this.$element.on('click', 'a[href^="#"]', function(e) { // 'click.zf.traverse'
+    e.preventDefault();
+    const arrival = this.getAttribute('href').replace(/\./g, '\\.');
+    const scrollPos = $(arrival).offset().top - _this.options.barOffset; // - _this.options.threshold / 2 - _this.options.barOffset;
 
-      $body.stop(true).animate({
-        scrollTop: scrollPos
-      }, opts);
-    });
+    $body.stop(true).animate({
+      scrollTop: scrollPos,
+    }, opts);
+  });
 };
 
 /**
  * Calls necessary functions to update Traverse upon DOM change
  * @function
  */
-Traverse.prototype.reflow = function(){
+Traverse.prototype.reflow = function() {
   this.calcPoints();
   this._updateActive();
 };
@@ -199,44 +199,46 @@ Traverse.prototype.reflow = function(){
  * @function
  * @fires Traverse#update
  */
- Traverse.prototype._updateActive = function(){
-   var winPos = parseInt(window.pageYOffset, 10),
-       curIdx;
+Traverse.prototype._updateActive = function() {
+  const winPos = parseInt(window.pageYOffset, 10);
+  let curIdx;
 
-   if(winPos + this.winHeight === this.docHeight){ curIdx = this.points.length - 1; }
-   else if(winPos < this.points[0]){ curIdx = 0; }
-   else{
-     var isDown = this.scrollPos < winPos,
-         _this = this,
-         curVisible = this.points.filter(function(p, i){
-           return isDown ?
+  if (winPos + this.winHeight === this.docHeight) {
+    curIdx = this.points.length - 1;
+  } else if (winPos < this.points[0]) {
+    curIdx = 0;
+  } else {
+    const isDown = this.scrollPos < winPos;
+    const _this = this;
+    const curVisible = this.points.filter(function(p, i) {
+      return isDown ?
              p <= (winPos + _this.options.barOffset + _this.options.threshold) :
              (p - (_this.options.barOffset + _this.options.threshold)) <= winPos;
-            //   p <= (winPos - (offset - _this.options.threshold)) :
-            //   (p - (-offset + _this.options.threshold)) <= winPos;
-         });
-     curIdx = curVisible.length ? curVisible.length - 1 : 0;
-   }
+      //   p <= (winPos - (offset - _this.options.threshold)) :
+      //   (p - (-offset + _this.options.threshold)) <= winPos;
+    });
+    curIdx = curVisible.length ? curVisible.length - 1 : 0;
+  }
 
-   var $prev = this.$active;
-   var $next = this.$links.eq(curIdx);
-   this.$active.removeClass(this.options.activeClass);
-   this.$active = $next.addClass(this.options.activeClass);
+  const $prev = this.$active;
+  const $next = this.$links.eq(curIdx);
+  this.$active.removeClass(this.options.activeClass);
+  this.$active = $next.addClass(this.options.activeClass);
 
-   if(this.options.deepLinking){
-     var hash = this.$active[0].getAttribute('href');
-     if(window.history.pushState){
-       window.history.pushState(null, null, hash);
-     }else{
-       window.location.hash = hash;
-     }
-   }
+  if (this.options.deepLinking) {
+    const hash = this.$active[0].getAttribute('href');
+    if (window.history.pushState) {
+      window.history.pushState(null, null, hash);
+    } else {
+      window.location.hash = hash;
+    }
+  }
 
-   this.scrollPos = winPos;
+  this.scrollPos = winPos;
 
-   // Fire event if the active element was changed
-   var changed = $prev[0] !== $next[0];
-   if (changed) {
-     this.$element.trigger('update.traverse', [this.$active]);
-   }
- };
+  // Fire event if the active element was changed
+  const changed = $prev[0] !== $next[0];
+  if (changed) {
+    this.$element.trigger('update.traverse', [this.$active]);
+  }
+};

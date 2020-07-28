@@ -79,7 +79,7 @@
   "eslintIgnore": [
     "node_modules",
     "views",
-    "public"
+    "docs"
   ],
   "description": "---\r ####Completed Tasks\r [x] CRUD\r [x] Admin Panel",
   "main": "app.js",
