@@ -1,16 +1,3 @@
-# API Documentation
-
-Base URL for all endpoints
-`https://localhost:7894/`
-
-Start `MongoDB` Service
-
-Run
-
-```javascript
-npm install //Install all Depedencies
-npm run start //Starts in localhost:7894
-```
 
 ## Endpoints
 

@@ -14,7 +14,7 @@
     "report": "nyc report --reporter=text --reporter=html",
     "dev": "nodemon ./app/bin/www",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
-    "docs": "spectacle -d ./app/config/swagger.config.json "
+    "docs": "node docs.js && spectacle  ./static-docs.json -t ./docs"
   },
   "dependencies": {
     "admin-bro": "^2.8.0",
@@ -22,6 +22,7 @@
     "admin-bro-mongoose": "^0.5.2",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "coffeescript": "^2.5.1",
     "cookie-parser": "~1.4.4",
     "debug": "^2.6.9",
     "ejs": "^3.1.3",

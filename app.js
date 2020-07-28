@@ -10,12 +10,16 @@ const swaggerUi = require('swagger-ui-express');
 
 const db = require('./app/db/index.db');
 const indexRouter = require('./app/routes/index');
-const swaggerOptions = require('./app/config/swagger.config');
+const swaggerOptions = require('./swagger.config.json');
 
 const app = express();
 
+const options = {
+  explorer: true,
+};
+
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, options));
 
 
 // view engine setup
@@ -25,8 +29,8 @@ app.set('view engine', 'ejs');
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));
-  // const adminRouter = require('./app/routes/renders/admin.router');
-  // app.use('/admin', adminRouter);
+  const adminRouter = require('./app/routes/renders/admin.router');
+  app.use('/admin', adminRouter);
 }
 
 db.connectToDB();

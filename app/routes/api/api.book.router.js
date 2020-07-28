@@ -5,6 +5,7 @@ const router = new express.Router();
 const Book = require('../../db/models/book.model.js');
 
 const {isEmpty} = require('../../utils/seralizeer.help');
+const {success, error, validation} = require('../../utils/api.responsive');
 const {searchParams, sanitizeQueryParams, isSortInValid} = require('../../utils/search.serializer');
 
 const NUM_RESULTS = 10;
@@ -57,7 +58,7 @@ router.get('/', sanitizeQueryParams, function(req, res) {
     console.table({page, name, cbNum, genr, sort, lte});
   }
   if (isSortInValid(sort)) {
-    res.status(400).json(createError(400, `sort must be one of asc and desc`));
+    res.status(422).json(validation({sort: 'must be one of asc and desc'}));
   } else {
     const findData = searchParams(name, cbNum, genr, lte);
     Book.find(findData, null, {
@@ -68,7 +69,8 @@ router.get('/', sanitizeQueryParams, function(req, res) {
       skip: NUM_RESULTS*(page-1)}, (onerror, foundBooks) => {
       /* istanbul ignore if */
       if (onerror) {
-        res.status(500).json(createError(500));
+        const status = 500;
+        res.status(status).json(error(createError(status), status));
       } else {
         Book.find({...findData}).countDocuments((err, total)=>{
           /* istanbul ignore if */
@@ -77,7 +79,7 @@ router.get('/', sanitizeQueryParams, function(req, res) {
           } else {
             const count = foundBooks.length;
             const books = count===0?`No Books\n Move Back by ${page-1-(~~(total/NUM_RESULTS))} Page(s)`:foundBooks;
-            res.json({count, total, page, books});
+            res.json(success('OK', {count, total, page, books}, res.status));
           }
         });
       }
@@ -101,7 +103,7 @@ router.get('/', sanitizeQueryParams, function(req, res) {
  *        name: Book
  *        required: true
  *        schema:
- *          type: object
+ *          $ref: '#/definitions/Book'
  *     responses:
  *       '201':
  *         description: Successful response
@@ -136,7 +138,7 @@ router.post('/', (request, response, next) => {
  *     summary: READ
  *     parameters:
  *      - in: path
- *        name: Book_id
+ *        name: id
  *        required: true
  *        type: string
  *     responses:
@@ -166,10 +168,15 @@ router.get('/:id', (request, response) => {
  *       - Books
  *     description: Update Books
  *     summary: UPDATE
+ *     parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        type: string
  *     responses:
- *       '201':
- *         description: Successful response
- *       '406':
+ *       '202':
+ *         description: Book Updated
+ *       '400':
  *         description: Empty Body
  */
 router.put('/:id/edit', (request, response) => {
@@ -202,10 +209,15 @@ router.put('/:id/edit', (request, response) => {
  *       - Books
  *     description: Delete Books
  *     summary: DELETE
+ *     parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        type: string
  *     responses:
- *       '201':
+ *       '204':
  *         description: Successful response
- *       '406':
+ *       '400':
  *         description: Empty Body
  */
 router.delete('/:id', (request, response) => {

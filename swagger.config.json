@@ -5,7 +5,8 @@
         "title": "Library-Management-System API",
         "description": "Library-Management-System API Information",
         "contact": {
-          "name": "Swarag"
+          "name": "Swarag",
+          "url": "https://github.com/Swarag-N"
         },
         "servers": ["http://localhost:7894"],
         "consumes": [
@@ -14,7 +15,15 @@
         "produces": [
             "application/json"
         ]
-      }
+      },
+      "tags":[{
+        "name": "Books",
+        "description": "Everything about Books",
+        "externalDocs":
+          {
+            "description": "See Full Docs at",
+            "url": "/"
+      }}]
     },
     "apis": ["./app/routes/index.js", "./app/routes/api/*.js","./app/db/models/book.model.js"]
 }

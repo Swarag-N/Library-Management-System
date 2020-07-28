@@ -1,17 +1,4 @@
-# Book List Query #
-
-To see CRUD [routes](/books.md)
-
-To Root [Home](../index.md)
-
-|Parameter|Query|Type|Options|Default|Description|
-|---|---|---|---|---|---|
-|[Page Number](#Page-Number)|`page`|Number| `>1` |`1`|Each Page Is Limited to return 10 results, for more results pass page number|
-|[Name](#Name)|`name`|String|`utf-8 string`|`' '`|Key Word of Book Name can be used to search|
-|[Genre](#Genre)|`genr`|String|`utf-8 string`|`' '`|Filter by Genre or search by genre|
-|[Sort](#Sort)|`sort`|String|```['asc','desc']```|`asc`|Sort Book by CBN|
-|[Cup Board Number(CBN)](#Cup-Board-Number(CBN))|`cbNum`|Number| `>1` |`1`|Filters Books with Cupboard Number Greater than given|
-|[Less Than (CBN)](#Less-Than-(CBN))|`lte`|boolean|```[true, false]```|`false`|To get Books less than a particular Number Must be passed with (CBN)|
+# Query Params #
 
 ## Page Number ##
 
