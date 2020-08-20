@@ -9,22 +9,22 @@ const app = require('../../app');
 
 let NEW_BOOK_ID;
 
-describe('API OF BOOKS', ()=>{
-  describe('CREATE of CRUD', ()=>{
+describe('API OF BOOKS', () => {
+  describe('CREATE of CRUD', () => {
     const data = {
       name: 'RandomName',
       cupBoardNumber: 78443215,
       genre: 'RandomGener',
     };
-    describe('NEW', ()=>{
-      it('add book with all info', (done)=>{
+    describe('NEW', () => {
+      it('add book with all info', (done) => {
         request(app)
             .post('/api/books/')
             .send(data)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(201)
-            .expect((res)=>{
+            .expect((res) => {
               const {body} = res;
               NEW_BOOK_ID = body._id;
               expect(body).to.be.an('object');
@@ -32,27 +32,27 @@ describe('API OF BOOKS', ()=>{
             .end(done);
       });
 
-      it('add book with partial info', (done)=>{
-        delete(data.name);
+      it('add book with partial info', (done) => {
+        delete data.name;
         request(app)
             .post('/api/books/')
             .send(data)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            .expect((res)=>{
+            .expect((res) => {
               const {body} = res;
               expect(body).to.have.property('message');
             })
             .expect(400, done);
       });
 
-      it('add book with no info', (done)=>{
+      it('add book with no info', (done) => {
         request(app)
             .post('/api/books/')
             .send({})
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
-            .expect((res)=>{
+            .expect((res) => {
               const {body} = res;
               expect(body).to.be.an('object');
               expect(body).to.have.property('message');
@@ -62,37 +62,43 @@ describe('API OF BOOKS', ()=>{
     });
   });
 
-  describe('READ of CRUD', ()=>{
+  describe('READ of CRUD', () => {
     let id;
-    it('LIST', (done)=>{
+    it('LIST', (done) => {
       request(app)
           .get('/api/books/')
           .expect('Content-Type', /json/)
-          .expect((res)=>{
-            id = res.body['books'][0]._id;
+          .expect((res) => {
+            id = res.body.results['books'][0]._id;
             expect(res.body).to.be.an('object');
+            expect(res.body.results).to.be.an('object');
           })
           .expect(200, done);
     });
 
-    describe('SHOW', ()=>{
-      it('Giving Correct ID', (done)=>{
+    describe('SHOW', () => {
+      it('Giving Correct ID', (done) => {
         request(app)
             .get(`/api/books/${id}`)
             .expect('Content-Type', /json/)
-            .expect((res)=>{
+            .expect((res) => {
               const {body} = res;
               expect(body).to.be.an('object');
-              expect(body).to.include.all.keys('genre', 'cupBoardNumber', 'name', '_id');
+              expect(body).to.include.all.keys(
+                  'genre',
+                  'cupBoardNumber',
+                  'name',
+                  '_id',
+              );
             })
             .expect(200, done);
       });
 
-      it('Giving Wrong ID', (done)=>{
+      it('Giving Wrong ID', (done) => {
         request(app)
             .get(`/api/books/thisIsWrongID`)
             .expect('Content-Type', /json/)
-            .expect((res)=>{
+            .expect((res) => {
               const {body} = res;
               expect(body).to.be.an('object');
               expect(body).to.have.property('message');
@@ -102,27 +108,27 @@ describe('API OF BOOKS', ()=>{
     });
   });
 
-  describe('UPDATE of CRUD', ()=>{
+  describe('UPDATE of CRUD', () => {
     const changes = {
       name: 'NewRandomName',
     };
-    it('update with correct id', (done)=>{
+    it('update with correct id', (done) => {
       request(app)
           .put(`/api/books/${NEW_BOOK_ID}/edit`)
           .send(changes)
           .expect('Content-Type', /json/)
-          .expect((res)=>{
+          .expect((res) => {
             const {body} = res;
             expect(body).to.include({...changes});
           })
           .expect(202, done);
     });
-    it('update with wrong id', (done)=>{
+    it('update with wrong id', (done) => {
       request(app)
           .put(`/api/books/randomWrongID/edit`)
           .send(changes)
           .expect('Content-Type', /json/)
-          .expect((res)=>{
+          .expect((res) => {
             const {body} = res;
             expect(body).to.be.an('object');
             expect(body).to.have.property('message');
@@ -130,12 +136,12 @@ describe('API OF BOOKS', ()=>{
           .expect(400, done);
     });
 
-    it('update with empty data', (done)=>{
+    it('update with empty data', (done) => {
       request(app)
           .put(`/api/books/randomWrongID/edit`)
           .send({})
           .expect('Content-Type', /json/)
-          .expect((res)=>{
+          .expect((res) => {
             const {body} = res;
             expect(body).to.be.an('object');
             expect(body).to.have.property('message');
@@ -144,17 +150,13 @@ describe('API OF BOOKS', ()=>{
     });
   });
 
-  describe('DELETE of CRUD', ()=>{
-    it('delete with correct id', (done)=>{
-      request(app)
-          .delete(`/api/books/${NEW_BOOK_ID}`)
-          .expect(204, done);
+  describe('DELETE of CRUD', () => {
+    it('delete with correct id', (done) => {
+      request(app).delete(`/api/books/${NEW_BOOK_ID}`).expect(204, done);
     });
 
-    it('delete with wrong id', (done)=>{
-      request(app)
-          .delete('/api/books/falseID')
-          .expect(400, done);
+    it('delete with wrong id', (done) => {
+      request(app).delete('/api/books/falseID').expect(400, done);
     });
   });
 });

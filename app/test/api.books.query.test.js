@@ -14,9 +14,9 @@ describe('Query PARAMETERS', ()=>{
           .get('/api/books?page=2')
           .expect('Content-Type', /json/)
           .expect((res)=>{
-            const {body} = res;
-            expect(body).to.have.property('books');
-            expect(body['books'][0]).to.be.an('object');
+            const {results} = res.body;
+            expect(results).to.have.property('books');
+            expect(results['books'][0]).to.be.an('object');
           })
           .expect(200, done);
     });
@@ -25,10 +25,10 @@ describe('Query PARAMETERS', ()=>{
       request(app)
           .get('/api/books?page=2')
           .expect((res)=>{
-            const {body} = res;
-            expect(body).to.have.property('books');
-            expect(body['books'][0]).to.be.an('object');
-            expect(body['books'].length>=2).to.be.true;
+            const {results} = res.body;
+            expect(results).to.have.property('books');
+            expect(results['books'][0]).to.be.an('object');
+            expect(results['books'].length>=2).to.be.true;
           })
           .expect(200, done);
     });
@@ -38,9 +38,9 @@ describe('Query PARAMETERS', ()=>{
           .get('/api/books?page=9999')
           .expect('Content-Type', /json/)
           .expect((res)=>{
-            const {body} = res;
-            expect(body).to.have.property('books');
-            expect(body['books']).to.a('string');
+            const {results} = res.body;
+            expect(results).to.have.property('books');
+            expect(results['books']).to.a('string');
           })
           .expect(200, done);
     });
@@ -73,9 +73,9 @@ describe('Query PARAMETERS', ()=>{
           .get('/api/books?name=a')
           .expect('Content-Type', /json/)
           .expect((res)=>{
-            const {body} = res;
-            expect(body).to.have.property('books');
-            expect(body['books'][0]).to.be.an('object');
+            const {results} = res.body;
+            expect(results).to.have.property('books');
+            expect(results['books'][0]).to.be.an('object');
           })
           .expect(200, done);
     });
@@ -84,8 +84,8 @@ describe('Query PARAMETERS', ()=>{
       request(app)
           .get('/api/books?name=b')
           .expect((res)=>{
-            const {body} = res;
-            expect(body['books'].length>=2).to.be.true;
+            const {results} = res.body;
+            expect(results['books'].length>=2).to.be.true;
           })
           .expect(200, done);
     });
@@ -108,9 +108,9 @@ describe('Query PARAMETERS', ()=>{
           .get('/api/books?genr=e')
           .expect('Content-Type', /json/)
           .expect((res)=>{
-            const {body} = res;
-            expect(body).to.have.property('books');
-            expect(body['books'][0]).to.be.an('object');
+            const {results} = res.body;
+            expect(results).to.have.property('books');
+            expect(results['books'][0]).to.be.an('object');
           })
           .expect(200, done);
     });
@@ -119,8 +119,8 @@ describe('Query PARAMETERS', ()=>{
       request(app)
           .get('/api/books?genr=2')
           .expect((res)=>{
-            const {body} = res;
-            expect(body['books'].length>=1).to.be.true;
+            const {results} = res.body;
+            expect(results['books'].length>=1).to.be.true;
           })
           .expect(200, done);
     });
@@ -143,9 +143,9 @@ describe('Query PARAMETERS', ()=>{
           .get('/api/books?sort=desc')
           .expect('Content-Type', /json/)
           .expect((res)=>{
-            const {body} = res;
-            expect(body).to.have.property('books');
-            expect(body['books'][0]).to.be.an('object');
+            const {results} = res.body;
+            expect(results).to.have.property('books');
+            expect(results['books'][0]).to.be.an('object');
           })
           .expect(200, done);
     });
@@ -158,15 +158,15 @@ describe('Query PARAMETERS', ()=>{
             const {body} = res;
             expect(body).to.have.property('message');
           })
-          .expect(400, done);
+          .expect(422, done);
     });
 
     it('showing at least 3 results', (done)=>{
       request(app)
           .get('/api/books?sort=desc')
           .expect((res)=>{
-            const {body} = res;
-            expect(body['books'].length>=3).to.be.true;
+            const {results} = res.body;
+            expect(results['books'].length>=3).to.be.true;
           })
           .expect(200, done);
     });
@@ -190,9 +190,9 @@ describe('Query PARAMETERS', ()=>{
           .get(`/api/books?cbNum=${CBN}`)
           .expect('Content-Type', /json/)
           .expect((res)=>{
-            const {body} = res;
-            expect(body).to.have.property('books');
-            expect(body['books'][0]).to.be.an('object');
+            const {results} = res.body;
+            expect(results).to.have.property('books');
+            expect(results['books'][0]).to.be.an('object');
           })
           .expect(200, done);
     });
@@ -201,8 +201,8 @@ describe('Query PARAMETERS', ()=>{
       request(app)
           .get(`/api/books?cbNum=${CBN}`)
           .expect((res)=>{
-            const {body} = res;
-            expect(body['books'].length>=3).to.be.true;
+            const {results} = res.body;
+            expect(results['books'].length>=3).to.be.true;
           })
           .expect(200, done);
     });
@@ -211,8 +211,9 @@ describe('Query PARAMETERS', ()=>{
       request(app)
           .get(`/api/books?cbNum=${CBN}`)
           .expect((res)=>{
-            const {body} = res;
-            expect(body['books'].every((book)=>book.cupBoardNumber>CBN)).to.be.true;
+            const {results} = res.body;
+            const {books} = results;
+            expect(books.every((book)=>book.cupBoardNumber>CBN)).to.be.true;
           })
           .expect(200, done);
     });
@@ -247,9 +248,9 @@ describe('Query PARAMETERS', ()=>{
           .get('/api/books?cbNum=4589&lte=desc')
           .expect('Content-Type', /json/)
           .expect((res)=>{
-            const {body} = res;
-            expect(body).to.have.property('books');
-            expect(body['books'][0]).to.be.an('object');
+            const {results} = res.body;
+            expect(results).to.have.property('books');
+            expect(results['books'][0]).to.be.an('object');
           })
           .expect(200, done);
     });
@@ -258,9 +259,9 @@ describe('Query PARAMETERS', ()=>{
       request(app)
           .get('/api/books?cbNum=45784&lte=desc')
           .expect((res)=>{
-            const {body} = res;
-            expect(body['books'][0]).to.be.an('object');
-            expect(body['books'].length >= 2).to.be.true;
+            const {results} = res.body;
+            expect(results['books'][0]).to.be.an('object');
+            expect(results['books'].length >= 2).to.be.true;
           })
           .expect(200, done);
     });
@@ -269,8 +270,8 @@ describe('Query PARAMETERS', ()=>{
       request(app)
           .get(`/api/books?cbNum=${CBN}&lte=desc`)
           .expect((res)=>{
-            const {body} = res;
-            expect(body['books'].every((book)=>book.cupBoardNumber<CBN)).to.be.true;
+            const {books} = res.body.results;
+            expect(books.every((book)=>book.cupBoardNumber<CBN)).to.be.true;
           })
           .expect(200, done);
     });
