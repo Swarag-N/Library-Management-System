@@ -25,5 +25,5 @@
             "url": "/"
       }}]
     },
-    "apis": ["./app/routes/index.js", "./app/routes/api/*.js","./app/db/models/book.model.js"]
+    "apis": ["./app/routes/index.js", "./app/routes/api/*.js","./app/db/models/*.js"]
 }

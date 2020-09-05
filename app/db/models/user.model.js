@@ -5,6 +5,12 @@ const AUTH = require('../../config/auth.config');
 const {emailValidator, passwordValidator} = require('../../utils/db.validators');
 
 // userSchema defines User Model
+/**
+ * @swagger
+ * definitions:
+ *  User:
+ *    type: 'object'
+ */
 const userSchema = new mongoose.Schema({
   email: {
     type: String,

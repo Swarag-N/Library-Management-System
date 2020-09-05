@@ -2,21 +2,23 @@ const AdminBro = require('admin-bro');
 const adminBroExpress = require('admin-bro-expressjs');
 const adminBroMongoose = require('admin-bro-mongoose');
 const Book = require('../../db/models/book.model');
+const User = require('../../db/models/user.model');
 const express = require('express');
 
 AdminBro.registerAdapter(adminBroMongoose);
 
-
 const adminBro = new AdminBro({
-  resources: [{
-    resource: Book,
-    options: {
-      listProperties: [
-        'name',
-        'cupBoardNumber',
-      ],
+  resources: [
+    {
+      resource: Book,
+      options: {
+        listProperties: ['name', 'cupBoardNumber'],
+      },
     },
-  }],
+    {
+      resource: User,
+    },
+  ],
   softwareBrothers: false,
   branding: {
     companyName: 'C4P',
@@ -28,8 +30,7 @@ const adminBro = new AdminBro({
       },
     },
   },
-},
-);
+});
 
 // const router = adminBroExpress.buildRouter(adminBro);
 // module.exports = router;

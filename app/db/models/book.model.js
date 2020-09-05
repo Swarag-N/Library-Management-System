@@ -9,15 +9,21 @@ const mongoose = require('mongoose');
  *      id:
  *        type: "string"
  *        format: "ObjectId"
+ *        example: "ObjectId('5f4399be7c4460234c97a71d')"
  *      name:
  *        type: "string"
  *        format: "string"
+ *        example: "War and Peace"
  *      cupBoardNumber:
  *        type: "integer"
  *        format: "int"
+ *        example: 7845
  *      genre:
  *        type: "string"
  *        format: "string"
+ *        example: "Action"
+ *    required:
+ *    - name
  *    xml:
  *      name: "Order"
  */
