@@ -51,6 +51,7 @@
           </section>
           <h5>Schema Definitions</h5>
           <a href="#definition-Book"> Book </a>
+          <a href="#definition-User"> User </a>
         </nav>
       </div>
       <div id="docs" class="row collapse expanded drawer" data-drawer>
@@ -275,10 +276,10 @@
                   <html>
                   <head></head>
                   <body><pre><code class="hljs language-json">{
-  <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;string (ObjectId)&quot;</span>,
-  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;string (string)&quot;</span>,
-  <span class="hljs-attr">&quot;cupBoardNumber&quot;</span>: <span class="hljs-string">&quot;integer (int)&quot;</span>,
-  <span class="hljs-attr">&quot;genre&quot;</span>: <span class="hljs-string">&quot;string (string)&quot;</span>
+  <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;ObjectId(&apos;5f4399be7c4460234c97a71d&apos;)&quot;</span>,
+  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;War and Peace&quot;</span>,
+  <span class="hljs-attr">&quot;cupBoardNumber&quot;</span>: <span class="hljs-number">7845</span>,
+  <span class="hljs-attr">&quot;genre&quot;</span>: <span class="hljs-string">&quot;Action&quot;</span>
 }
 </code></pre> </body>
                   </html>
@@ -593,6 +594,7 @@
                       <span class="json-property-type">string</span>
                       <span class="json-property-format">(string)</span>
                       <span class="json-property-range" title="Value limits"></span>
+                      <span class="json-property-required"></span>
                     </dt>
                     <dt data-property-name="cupBoardNumber">
                       <span class="json-property-name">cupBoardNumber:</span>
@@ -616,10 +618,79 @@
                   <html>
                   <head></head>
                   <body><pre><code class="hljs language-json">{
-  <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;string (ObjectId)&quot;</span>,
-  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;string (string)&quot;</span>,
-  <span class="hljs-attr">&quot;cupBoardNumber&quot;</span>: <span class="hljs-string">&quot;integer (int)&quot;</span>,
-  <span class="hljs-attr">&quot;genre&quot;</span>: <span class="hljs-string">&quot;string (string)&quot;</span>
+  <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;ObjectId(&apos;5f4399be7c4460234c97a71d&apos;)&quot;</span>,
+  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;War and Peace&quot;</span>,
+  <span class="hljs-attr">&quot;cupBoardNumber&quot;</span>: <span class="hljs-number">7845</span>,
+  <span class="hljs-attr">&quot;genre&quot;</span>: <span class="hljs-string">&quot;Action&quot;</span>
+}
+</code></pre> </body>
+                  </html>
+                  <!-- </div> -->
+                </section>
+              </div>
+            </div>
+          </div>
+          <div id="definition-User" class="definition panel" data-traverse-target="definition-User">
+            <h2 class="panel-title">
+              <a name="/definitions/User"></a>User: object
+              <!-- <span class="json-property-type"><span class="json-property-type">object</span>
+              <span class="json-property-range" title="Value limits"></span>
+              
+              
+              </span> -->
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <section class="json-schema-properties">
+                  <dl>
+                    <dt data-property-name="id">
+                      <span class="json-property-name">id:</span>
+                      <span class="json-property-type">string</span>
+                      <span class="json-property-format">(ObjectId)</span>
+                      <span class="json-property-range" title="Value limits"></span>
+                    </dt>
+                    <dt data-property-name="email">
+                      <span class="json-property-name">email:</span>
+                      <span class="json-property-type">email</span>
+                      <span class="json-property-format">(email)</span>
+                      <span class="json-property-range" title="Value limits"></span>
+                    </dt>
+                    <dt data-property-name="password">
+                      <span class="json-property-name">password:</span>
+                      <span class="json-property-type">string</span>
+                      <span class="json-property-range" title="Value limits"></span>
+                    </dt>
+                    <dt data-property-name="firstname">
+                      <span class="json-property-name">firstname:</span>
+                      <span class="json-property-type">string</span>
+                      <span class="json-property-range" title="Value limits"></span>
+                    </dt>
+                    <dt data-property-name="lastname">
+                      <span class="json-property-name">lastname:</span>
+                      <span class="json-property-type">string</span>
+                      <span class="json-property-range" title="Value limits"></span>
+                    </dt>
+                    <dt data-property-name="fullname">
+                      <span class="json-property-name">fullname:</span>
+                      <span class="json-property-type">string</span>
+                      <span class="json-property-range" title="Value limits"></span>
+                    </dt>
+                  </dl>
+                </section>
+              </div>
+              <div class="doc-examples">
+                <section>
+                  <h5>Example</h5>
+                  <!-- <div class="hljs"> -->
+                  <html>
+                  <head></head>
+                  <body><pre><code class="hljs language-json">{
+  <span class="hljs-attr">&quot;id&quot;</span>: <span class="hljs-string">&quot;ObjectId(&apos;5f4399be7c4460234c97a71d&apos;)&quot;</span>,
+  <span class="hljs-attr">&quot;email&quot;</span>: <span class="hljs-string">&quot;example@gmail.com&quot;</span>,
+  <span class="hljs-attr">&quot;password&quot;</span>: <span class="hljs-string">&quot;qwQ12$#w&quot;</span>,
+  <span class="hljs-attr">&quot;firstname&quot;</span>: <span class="hljs-string">&quot;Ram&quot;</span>,
+  <span class="hljs-attr">&quot;lastname&quot;</span>: <span class="hljs-string">&quot;John&quot;</span>,
+  <span class="hljs-attr">&quot;fullname&quot;</span>: <span class="hljs-string">&quot;Ram John&quot;</span>
 }
 </code></pre> </body>
                   </html>

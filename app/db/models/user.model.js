@@ -10,6 +10,27 @@ const {emailValidator, passwordValidator} = require('../../utils/db.validators')
  * definitions:
  *  User:
  *    type: 'object'
+ *    properties:
+ *      id:
+ *        type: "string"
+ *        format: "ObjectId"
+ *        example: "ObjectId('5f4399be7c4460234c97a71d')"
+ *      email:
+ *        type: "email"
+ *        format: "email"
+ *        example: "example@gmail.com"
+ *      password:
+ *        type: "string"
+ *        example: "qwQ12$#w"
+ *      firstname:
+ *        type: "string"
+ *        example: "Ram"
+ *      lastname:
+ *        type: "string"
+ *        example: "John"
+ *      fullname:
+ *        type: "string"
+ *        example: "Ram John"
  */
 const userSchema = new mongoose.Schema({
   email: {
@@ -33,7 +54,6 @@ const userSchema = new mongoose.Schema({
     trim: true,
     index: true,
   },
-// });
 }, {
   // toObject: {virtuals: true},
   toJSON: {virtuals: true},

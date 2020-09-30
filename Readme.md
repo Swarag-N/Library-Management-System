@@ -114,3 +114,16 @@ Has Authentication
 
 - [ ] Middlewares to Authenticate and Authorize
 - [ ] Add Tests for User Routes
+- [ ] Use Case Diagram
+- [ ] Librarian Seperate Login
+- [ ] Update Book Model
+        - [ ] History
+        - [ ] Recommendation
+- [ ] Fine System
+        - [ ] Bills
+        - [ ] Over Dues
+- [ ] User Type => Student and Teacher
+- [ ] User Model
+        - [ ] Account Model
+                - [ ] History
+                - [ ] Billing

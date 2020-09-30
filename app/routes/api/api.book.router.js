@@ -102,6 +102,7 @@ router.get('/', sanitizeQueryParams, function(req, res) {
  *      - in: body
  *        name: Book
  *        required: true
+ *        description: Add a Book with these details
  *        schema:
  *          $ref: '#/definitions/Book'
  *     responses:
@@ -173,6 +174,12 @@ router.get('/:id', (request, response) => {
  *        name: id
  *        required: true
  *        type: string
+ *      - in: body
+ *        name: Book
+ *        required: true
+ *        description: Add a Book with these details
+ *        schema:
+ *          $ref: '#/definitions/Book'
  *     responses:
  *       '202':
  *         description: Book Updated
