@@ -11,5 +11,5 @@ const bookDeatilSchema = new mongoose.Schema({
 });
 
 /* eslint new-cap: ["error", { "newIsCapExceptionPattern": "^mongoose\.." }] */
-const BookDetail = new mongoose.model('BookDetail',bookDeatilSchema);
+const BookDetail = new mongoose.model('BookDetail', bookDeatilSchema);
 module.exports = BookDetail;
