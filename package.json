@@ -26,7 +26,7 @@
     "cookie-parser": "~1.4.4",
     "debug": "^2.6.9",
     "ejs": "^3.1.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.1",
     "helmet": "^3.23.3",
